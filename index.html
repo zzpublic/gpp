@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y: scroll;background-color: #fff">
+<head>
+    <meta charset="UTF-8">
+    <title>GPP</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bui.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/swiper.min.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body style="background-color: #000">
+<div>
+    <div id="app">
+        <header id="p_h">
+			<i style="font-size:20px;color:rgba(255,255,255,0.6);margin:10px;position:absolute" class="user glyphicon glyphicon-user" onclick="location='user.html'"/></i>
+            <img class="banner" src="/image/index/banner.png">
+            <img class="language" src="/image/index/language.png" onclick="$('.language-div').toggle()"/>
+			
+            <div class="language-div">
+                <div class="active">
+                    中文繁体
+                </div>
+                <div>
+                    日语
+                </div>
+                <div>
+                    韩语
+                </div>
+            </div>
+            <div class="header-title">
+                <img src="/image/index/header_kuang.png"/>
+                <p>新一代去中心化链商造富运动</p>
+            </div>
+        </header>
+        <div id="p_b">
+            <div class="award inline-div">
+                <div class="title">
+                    — 奖池 —
+                    <div class="right">
+                        <img src="/image/index/question.png" onclick="model('explain')"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="left">
+                        <div>
+                            <button>小奖池</button>
+                            <span onclick="model('award')">开奖记录</span>
+                        </div>
+                        <div>
+                            <span id="xjc"></span> ETH
+                        </div>
+                        <img src="/image/index/small.png"/>
+                    </div>
+                    <div class="right">
+                        <div>
+                            <button>大奖池</button>
+                        </div>
+                        <div>
+                            <span id="djc"></span> ETH
+                        </div>
+                        <div>
+                            <p style="font-size: 17px">倒计时</p>
+                            <p><span id="djs"></span></p>
+                        </div>
+                        <img src="/image/index/big.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket inline-div">
+                <div class="title">
+                    — 门票购买 —
+                </div>
+                <div class="body">
+                    <div class="item">
+                        <div class="row-div">
+                            <span>1:<span id="dhbl"></span></span>
+                            <button onclick="model('ticket')">购买门票</button>
+                        </div>
+                        <div class="row-div">
+                            <div class="progress progress-striped" style="width: 70%;height: 5px;margin: 0;">
+                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                     aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: 90%;background-color: #E2E208">
+                                </div>
+                            </div>
+                            <span class="num">剩余门票：<span id="symp"></span></span>
+                        </div>
+                        <div class="num2">剩余轮数:<span  id="syls"></span>轮</div>
+                    </div> 
+					<div class="item">
+                        <div class="row-div">
+                            <span>1:<span id="dhbl2"></span></span>
+                        </div>
+                        <div class="row-div">
+                            <div class="progress progress-striped" style="width: 70%;height: 5px;margin: 0;">
+                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: 90%;background-color: #E2E208">
+                                </div>
+                            </div>
+                            <span class="num">剩余门票：<span>10000</span></span>
+                        </div>
+                        <div class="num2">剩余轮数:<span></span>10轮</div>
+                    </div> 
+					<div class="item">
+                        <div class="row-div">
+                            <span>1:<span id="dhbl3"></span></span>
+                        </div>
+                        <div class="row-div">
+                            <div class="progress progress-striped" style="width: 70%;height: 5px;margin: 0;">
+                                <div class="progress-bar progress-bar-info" role="progressbar"
+                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: 90%;background-color: #E2E208">
+                                </div>
+                            </div>
+                            <span class="num">剩余门票：<span>10000</span></span>
+                        </div>
+                        <div class="num2">剩余轮数:<span>10</span>轮</div>
+                    </div> 
+                </div>
+            </div>
+            <p class="destroy">已销毁门票总数：<span id="yxhmp"></span></p>
+            <div class="inline-div user">
+                <div class="title">
+                    — 个人中心 —
+                </div>
+                <div class="body">
+                    <div>
+						<div align="center" id="zh" style="text-decoration:underline;font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;" onclick="location='user.html'">未登录</div>
+                       <div>
+                            <p>账户ETH余额：<span id="zhye">0</span> ETH</p>
+                        </div>
+						<p>我的等级：<span>V0</span></p>
+                        <p>我的分享：<span>0</span> （人）</p>
+                        <p>团队业绩：<span>0</span> ETH</p>
+                    </div>
+                    <div>
+                        <button onclick="model('share')">详情</button>
+                    </div>
+                </div>
+            </div>
+            <div class="contract inline-div">
+                <div class="title">
+                    — 合约活期理财 —
+                </div>
+                <div class="body">
+                    <div class="balance">
+                        <div>
+                            <p>理财账户余额：</p>
+                            <p><span id="lczhye">0</span> ETH</p>
+                        </div>
+                        <div>
+                            <button onclick="model('contact')">购买理财</button>
+                            <p class="apply" onclick="model('withdraw')">申请提现</p>
+                        </div>
+                    </div>
+                    <div class="earnings">
+                        <div>
+                            <p>预计可获得收益：<span id="yjsy">0</span> ETH</p>
+                            <p>已累计获得收益：<span id="yhsy">0</span> ETH</p>
+                            <p>出局剩余可收益：<span  id="sysy">0</span> ETH</p>
+                            <p>账户门票余额：<span  id="zhmpyr">0</span></p>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="invite">
+                <div class="is_invite">
+                    <img src="/image/index/matrix.png"/>
+                    <p>未参与</p>
+                </div>
+                <p class="text">邀请链接</p>
+                <div class="linkurl" style="color: #ccc;text-align: center;"></div>
+                <div class="inline-div link linkcode">参与后即可生成自己的邀请码</div>
+            </div>
+            <div class="inline-div preachers_reward  ">
+                <div class="title">
+                    — 布道者奖励 —
+                </div>
+                <div class="body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>排名</td>
+                            <td>ID</td>
+                            <td>奖励</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>15235201306</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>15235201306</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>15235201306</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>15235201306</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="inline-div preachers_reward  ">
+                <div class="title">
+                    — 奖励 —
+                </div>
+                <div class="body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td class="select">
+                                <select>
+                                    <option>全部奖励</option>
+                                </select>
+                            </td>
+                            <td>时间</td>
+                            <td>额度</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>分红</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>静态奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>大奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>小奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="hr">
+                <img src="/image/index/hr.png"/>
+                <p>渠道合作伙伴</p>
+            </div>
+            <div class="friend">
+                <img src="/image/index/friend.png"/>
+            </div>
+            <div class="contact inline-div">
+                <div class="title">
+                    — 奖励 —
+                </div>
+                <div class="body">
+                    ebservice001@outlook.com
+                </div>
+            </div>
+            <div class="copyright">
+                <p>版权所有©201</p>
+                <p>ETH BANK Foundation 保留所有权利</p>
+            </div>
+        </div>
+        <div id="model">
+            <div class="model-bg">
+            </div>
+            <div class="model award model-table">
+                <div class="title">
+                    <p>开奖记录</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>时间</td>
+                            <td>ID</td>
+                            <td>奖金</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2019-10-12</td>
+                            <td>15235201306</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-12</td>
+                            <td>15235201306</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-12</td>
+                            <td>15235201306</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-12</td>
+                            <td>15235201306</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="model explain">
+                <div class="title">
+                    <p>说明</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖
+                    说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体
+                    内容开奖说明具体内容开奖说明具体内容.
+                </div>
+            </div>
+            <div class="model ticket buy" >
+                <div class="title">
+                    <p>门票购买</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="num">购买GPP数量：<input type="text " value="0" id="gmmps" oninput="jseth(this.value)">  </div>
+                    <div class="need">需要ETH：<span id="xyeth">0</span>  </div>
+                    <div class="button" onclick="buyticket()">
+                        <button>立即支付</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="model share model-table" >
+                <div class="title">
+                    <p>我的分享</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>理财</td>
+                            <td>业绩</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>15235201306</td>
+                            <td>0.2155 ETH</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>15235201306</td>
+                            <td>0.2155 ETH</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>15235201306</td>
+                            <td>0.2155 ETH</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>15235201306</td>
+                            <td>0.2155 ETH</td>
+                            <td>2.3125 ETH</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="model contact buy" >
+                <div class="title">
+                    <p>理财</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="num">支付金额：<input type="text " value="0" id="gmlc" oninput="jseth2(this.value)">ETH  </div>
+                    <div class="need">需要门票：<span id="xymp">0</span>  </div>
+                    <div class="button" onclick="invest()">
+                        <button>立即支付</button>
+                    </div>
+                </div>
+            </div>
+            <div class="model withdraw buy">
+                <div class="title">
+                    <p>申请提现</p>
+                    <div class="right">
+                        <img class="close-img" src="/image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="need">提现额度：<span id="txed">0</span>  </div>
+                    <div class="button">
+                        <button onclick="tx()">立即提现</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/script/jquery.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/script/common.js"></script>
+<script src="/admin/web3.min.js"></script>
+<script src="/script/bui.js"></script>
+<script src="/script/swiper.min.js"></script>
+<script src="/script/vue.js"></script>
+<script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"></script>
+<script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+<script type="text/javascript">
+    init_bui()
+
+    function model(name) {
+        if(name){
+            $('.model-bg').show();
+            $('#model .model.'+name).show();
+        }
+    }
+
+    function init_bui() {
+        $('.language-div div').click(function () {
+            $('.language-div div').removeClass('active');
+            $(this).addClass('active')
+            $('.language-div').hide()
+        });
+        $('.close-img').click(function () {
+            $('.model').hide();
+            $('.model-bg').hide();
+        });
+        var loading = bui.loading()
+        bui.ready(function () {
+
+        })
+    }
+	
+
+	var syms=0;
+	var myuid=-1;
+	var rate=-1;
+	var cc;
+   var ok=false;
+   var wallet;
+   var isMetaMask=false;
+   var rate=0;
+
+	$(function(){
+		if (typeof web3 !== 'undefined') {
+            isMetaMask=true;
+			metamaskinit();
+       } 
+	   else
+	   {
+			   web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
+			   if(localStorage["account_info"]!=null)
+			   {
+				   var m = JSON.parse(localStorage["account_info"]);
+				   $("#zh").html(m.address);
+				   web3.eth.defaultAccount = m.address;
+				   getBalance();setInterval(getBalance,10000);
+
+			   }
+			   else
+			   {
+					web3.eth.defaultAccount=null;
+			   }
+			   if(localStorage["account_uid"]!=null)
+			   {
+				   myuid = JSON.parse(localStorage["uid"]);
+			   }
+			   var infoContract = web3.eth.contract(abi);
+			   cc= infoContract.at(contractAddr);
+			   getContractBalance();
+			   setInterval(getContractBalance,15000);
+			   setInterval(djs,1000);
+			   getu();
+	   }
+   });
+   async function metamaskinit()
+   {
+	   accounts = await ethereum.enable();
+		if(accounts.length<1)
+		{
+			if(ethereum.isMetaMask)
+			{
+				alert("已检测到MetaMask，请确认MetaMask是否已登录!");
+			}
+			else
+			{
+				alert("已检测到imtoken，请确认imtoken有eth账户!");
+			}
+			return;
+		}
+		web3.eth.defaultAccount = accounts[0];
+        $("#zh").html(web3.eth.defaultAccount);
+        getBalance();setInterval(getBalance,10000);
+
+		var infoContract = web3.eth.contract(abi);
+		cc= infoContract.at(contractAddr);
+		getContractBalance();
+		setInterval(getContractBalance,15000);
+		setInterval(djs,1000);
+		getu();
+   }
+   function djs()
+   {
+	   syms--;
+	   if(syms<0){syms=0;}
+	   $("#djs").html(formatSeconds(syms));
+   }
+   function logout()
+   {
+       localStorage.removeItem("account_info");
+       location.reload();
+   }
+
+   function getContractBalance()
+   {
+       cc.contractBalance(function(error, result){
+           if(!error)
+           {
+               console.log(JSON.parse(result));
+               $("#hyye").html((JSON.parse(result)/1000000000000000000).toFixed(4));
+           }
+              
+           else
+           {   console.error(error);}    
+       });
+	   if( web3.eth.defaultAccount!=null)
+	   {
+			cc.balanceOf(web3.eth.defaultAccount,function(error, result){
+			   if(!error)
+			   {
+				   console.log(JSON.parse(result));
+				    $("#zhmpyr").html((JSON.parse(result)/1000000000000000000).toFixed(4));
+			   }
+				  
+			   else
+			   {   console.error(error);}    
+		   });
+		   }
+		cc.rate(function(error, result){
+			   if(!error)
+			   {
+				   console.log(JSON.parse(result));
+				   $("#dhbl").html(result+"");
+				   $("#dhbl2").html((result-1)+"");
+				   $("#dhbl3").html((result-2)+"");
+				   rate = result;
+			   }
+				  
+			   else
+			   {   console.error(error);}    
+		   });
+
+		cc.sellTicketIncome(function(e, r){ 
+			$("#xjc").html((JSON.parse(r)/1000000000000000000*0.3).toFixed(4));
+			$("#djc").html((JSON.parse(r)/1000000000000000000*0.5).toFixed(4));
+		});
+
+		var x = Math.round(new Date() / 1000);
+		
+        cc.endTime(function(e, r){ syms=JSON.parse(r)-x; if(syms<0){syms+=100000;} $("#djs").html(formatSeconds(syms));});
+
+		cc.sellTicketCount(function(e, r){ 
+			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
+			var symp  =628000000-ymmp;
+			$("#symp").html(ymmp-0==0?10000:symp%10000);
+			$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
+			
+		});
+		cc.destoryTicketCount(function(e, r){ 
+			$("#yxhmp").html((JSON.parse(r)/1000000000000000000).toFixed(0));
+		});
+
+		if(myuid!=-1)
+		{
+			cc.users(myuid,function(error2, result2){
+                        if(!error2)
+                        {
+                            if(result2[0]==web3.eth.defaultAccount.toLowerCase())
+							{
+								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
+								$("#yjsy").html((result2[2]/1000000000000000000).toFixed(4)*3);
+								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
+								$("#sysy").html((result2[2]/1000000000000000000).toFixed(4)*3-(result2[4]/1000000000000000000).toFixed(4));
+								$("#txed").html((result2[3]/1000000000000000000).toFixed(4));
+
+							}
+                        }
+                    });
+		}
+   }
+   function getBalance()
+   {
+           web3.eth.getBalance(web3.eth.defaultAccount, function (error, balance) {
+                       $("#zhye").html((JSON.parse(balance)/1000000000000000000).toFixed(4));
+           });  
+   }
+   function registe(addr)
+   {
+        var cmd = '0xc4a796c1000000000000000000000000'+addr.substr(2)
+
+        if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: 0,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+          
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+           
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               console.log(re);
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 60000,
+                   gasPrice: 2000000000,
+                   value: 0,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                           $("#ts0").html(hash);
+                       }
+                       else
+                       {
+                           $("#ts0").html(err);
+                       }
+                   });
+               });
+           });
+        }
+     
+   }
+   
+   function invest()
+   {
+   
+       var cmd = "0xe8b5e51f";
+	    var amount = $("#gmlc").val();
+	   if((amount-0)>($("#zhmpyr").html()-0))
+	   {
+		   alert("门票余额不足");
+		   return;
+	    }
+       if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: (amount-0)*1000000000000000000,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+   
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 300000,
+                   gasPrice: 1000000000,
+                   value: (amount-0)*1000000000000000000,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                            alert("购买成功,请稍等查看理财余额");
+                       }
+                       else
+                       {
+                           alert("购买失败");
+                       }
+                   });
+               });
+           });
+
+		}
+   
+   }
+   function buyticket()
+   {
+   
+       var cmd = "0xedca914c";
+       var amount = $("#gmmps").val()/rate;
+	   console.log(amount);
+	   if(amount>$("#zhye").html())
+	   {
+		   alert("ETH余额不足");
+		   return;
+	    }
+	   if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: (amount-0)*1000000000000000000,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+       
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+   
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 300000,
+                   gasPrice: 1000000000,
+                   value: (amount-0)*1000000000000000000,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                           alert("购买成功,请稍等查看门票余额");
+                       }
+                       else
+                       {
+                           alert("购买失败");
+                       }
+                   });
+               });
+           });
+		}
+   }
+   function tx()
+   {
+   
+       var cmd = "0x3ccfd60b";
+       var amount = 0;
+	   if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: (amount-0)*1000000000000000000,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+       
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+   
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 300000,
+                   gasPrice: 1000000000,
+                   value: (amount-0)*1000000000000000000,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                           alert("提现成功,请稍等查看账户余额");
+                       }
+                       else
+                       {
+                           alert("提现失败");
+                       }
+                   });
+               });
+           });
+		}
+   }
+   function PrefixZero(str, length) 
+   {
+        return (Array(length).join('0') + str).slice(-length);
+   }
+
+	function AESDecrypt(word,password) {
+       var key = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(password).toString());
+       var encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+       var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+       var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, key, {
+       mode: CryptoJS.mode.ECB,
+       padding: CryptoJS.pad.Pkcs7
+       });
+       return  decryptedData.toString(CryptoJS.enc.Utf8);
+   }
+   
+   function AESEncrypt(word,password) {
+       var key = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(password).toString());
+       var encryptedData = CryptoJS.AES.encrypt(word, key, {
+       mode: CryptoJS.mode.ECB,
+       padding: CryptoJS.pad.Pkcs7
+       });
+       return encryptedData.ciphertext.toString();
+   }
+   function formatSeconds(value) {
+
+	    var theTime = parseInt(value);// 秒
+	    var middle= 0;// 分
+	    var hour= 0;// 小时
+
+	    if(theTime > 60) {
+	        middle= parseInt(theTime/60);
+	        theTime = parseInt(theTime%60);
+	        if(middle> 60) {
+	            hour= parseInt(middle/60);
+	            middle= parseInt(middle%60);
+	        }
+	    }
+	    var result = ""+parseInt(theTime)+"秒";
+	    if(middle > 0) {
+	        result = ""+parseInt(middle)+"分"+result;
+	    }
+	    if(hour> 0) {
+	        result = ""+parseInt(hour)+"小时"+result;
+	    }
+	    return result;
+	}
+
+   function getu()
+   {
+        if( web3.eth.defaultAccount==null)
+	    {
+			return;
+		}
+        cc.usersLength(function(error, result){
+           if(!error)
+           {
+               console.log(JSON.parse(result));
+               var tjraddr="";
+               var tjrid=-1;
+              
+               if(GetUrlParms().hasOwnProperty("code"))
+               {
+                    tjrid=GetUrlParms()["code"];
+                    console.log(tjrid);
+               }
+               for(let i=0;i<result;i++)
+               {
+                  cc.users(i,function(error2, result2){
+                        if(!error2)
+                        {
+                            //console.log(result2);
+                            if(result2[0]==web3.eth.defaultAccount.toLowerCase())
+							{
+                                myuid= i;
+								$(".is_invite").hide();
+                                $(".linkcode").html("您的邀请码: "+(myuid+10001));
+                                $(".linkurl").html("https://qbank.wotrack.com/?code="+(myuid+10001));
+								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
+								$("#yjsy").html((result2[2]/1000000000000000000).toFixed(4)*3);
+								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
+								$("#sysy").html((result2[2]/1000000000000000000).toFixed(4)*3-(result2[4]/1000000000000000000).toFixed(4));
+                                $("#txed").html((result2[3]/1000000000000000000).toFixed(4));
+                            }
+                            if(tjrid!=-1 && tjrid-10000==i)
+                            {
+                                tjraddr= result2[0];
+                                console.log(tjraddr);
+                            }
+                            
+                            if(i==result-1&& myuid==-1 && tjraddr!="")
+                            {
+                                console.log("bvbb");
+                                    if(confirm("确定注册新账户,推荐人为"+tjraddr+"吗?"))
+                                    {
+                                        registe(tjraddr);
+                                    }
+                            }
+                        }
+                      
+
+                    });
+               }
+           }  
+           else
+           {   console.error(error);}    
+       })
+   }
+
+   function jseth(x)
+   {
+		$("#xyeth").html(x/rate); 
+	}
+	function jseth2(x)
+   {
+		$("#xymp").html(x); 
+    }
+    
+    function GetUrlParms()    
+    {
+        var args=new Object();   
+        var query=location.search.substring(1);//获取查询串   
+        var pairs=query.split("&");//在逗号处断开   
+        for(var   i=0;i<pairs.length;i++)   
+        {   
+            var pos=pairs[i].indexOf('=');//查找name=value   
+                if(pos==-1)   continue;//如果没有找到就跳过   
+                var argname=pairs[i].substring(0,pos);//提取name   
+                var value=pairs[i].substring(pos+1);//提取value   
+                args[argname]=unescape(value);//存为属性   
+        }
+        return args;
+    }
+</script>
+</html>
