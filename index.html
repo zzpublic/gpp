@@ -85,7 +85,6 @@
                             </div>
                             <span class="num">剩余门票：<span id="symp"></span></span>
                         </div>
-                        <div class="num2">剩余轮数:<span  id="syls"></span>轮</div>
                     </div> 
 					<div class="item">
                         <div class="row-div">
@@ -591,8 +590,8 @@
 		cc.sellTicketCount(function(e, r){ 
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
-			$("#symp").html(ymmp-0==0?10000:symp%10000);
-			$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
+			$("#symp").html(ymmp-0==0?200*rate:symp%(200*rate));
+			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
 		cc.destoryTicketCount(function(e, r){ 
