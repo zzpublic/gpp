@@ -97,9 +97,9 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余门票：<span>10000</span></span>
+                            <span class="num">剩余门票：<span id="symp2"></span></span>
                         </div>
-                        <div class="num2">剩余轮数:<span></span>10轮</div>
+                        <!-- <div class="num2">剩余轮数:<span></span>10轮</div> -->
                     </div> 
 					<div class="item">
                         <div class="row-div">
@@ -112,9 +112,9 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余门票：<span>10000</span></span>
+                            <span class="num">剩余门票：<span id="symp3">10000</span></span>
                         </div>
-                        <div class="num2">剩余轮数:<span>10</span>轮</div>
+                        <!-- <div class="num2">剩余轮数:<span>10</span>轮</div> -->
                     </div> 
                 </div>
             </div>
@@ -187,7 +187,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>1</td>
                             <td>15235201306</td>
                             <td>0.0001 ETH</td>
@@ -206,7 +206,7 @@
                             <td>4</td>
                             <td>15235201306</td>
                             <td>0.0001 ETH</td>
-                        </tr>
+                        </tr> -->
                         </tbody>
                     </table>
 
@@ -230,7 +230,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>分红</td>
                             <td>2019-09-05</td>
                             <td>0.0001 ETH</td>
@@ -249,7 +249,7 @@
                             <td>小奖池</td>
                             <td>2019-09-05</td>
                             <td>0.0001 ETH</td>
-                        </tr>
+                        </tr> -->
 
                         </tbody>
                     </table>
@@ -296,7 +296,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>2019-10-12</td>
                             <td>15235201306</td>
                             <td>2.3125 ETH</td>
@@ -315,7 +315,7 @@
                             <td>2019-10-12</td>
                             <td>15235201306</td>
                             <td>2.3125 ETH</td>
-                        </tr>
+                        </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -366,7 +366,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>15235201306</td>
                             <td>0.2155 ETH</td>
                             <td>2.3125 ETH</td>
@@ -385,7 +385,7 @@
                             <td>15235201306</td>
                             <td>0.2155 ETH</td>
                             <td>2.3125 ETH</td>
-                        </tr>
+                        </tr> -->
 
                         </tbody>
                     </table>
@@ -591,6 +591,8 @@
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
 			$("#symp").html(ymmp-0==0?200*rate:symp%(200*rate));
+            $("#symp2").html(ymmp-0==0?200*(rate-1):symp%(200*(rate-1)));
+            $("#symp3").html(ymmp-0==0?200*(rate-2):symp%(200*(rate-2)));
 			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
