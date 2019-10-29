@@ -591,8 +591,8 @@
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
 			$("#symp").html(ymmp-0==0?200*rate:symp%(200*rate));
-            $("#symp2").html(ymmp-0==0?200*(rate-1):symp%(200*(rate-1)));
-            $("#symp3").html(ymmp-0==0?200*(rate-2):symp%(200*(rate-2)));
+            $("#symp2").html(200*(rate-1));
+            $("#symp3").html(200*(rate-2));
 			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
@@ -981,7 +981,7 @@
 	}
 	function jseth2(x)
    {
-		$("#xymp").html(x); 
+		$("#xymp").html(x*rate); 
     }
     
     function GetUrlParms()    
