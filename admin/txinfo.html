@@ -1,0 +1,92 @@
+
+<html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <meta name="Generator" content="EditPlus®">
+     <meta name="Author" content="">
+     <meta name="Keywords" content="">
+     <meta name="Description" content="">
+     <title>TX Info</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   #xm .btn
+   {
+       min-width:150px;
+       margin: 5px;
+   }
+    </style>
+    </head>
+    <body style="background:#999;color:orange">
+        <div style="max-width:1000px;margin:0px auto;padding:10px 30px; background:#333">
+                   <!-- <a href="index.html">返回首页</a> -->
+                   <div class="table">
+                      <h2 align="center">交易详情</h2>
+                   </div>
+                 
+   
+                   <div class="table" style="margin-top: 50px">
+                       <input type="text" id="txhash" class="form-control pull-left" placeholder="交易Hash" style="max-width:500px">
+                       <input type="button" class="btn btn-info" onclick="tx()" value="查交易">
+                       
+                       <br>
+                  </div>
+                  交易信息:<br>
+                  <span id="ts0"></span>
+                  <hr>
+                  交易结果:<br>
+                  <span id="ts1"></span>
+           </div>
+   
+   
+    </body>
+   </html>
+   <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+   <script src="web3.min.js"></script>
+   
+   <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"></script>
+   <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+   <script>
+   var cc;
+   var ok=false;
+   var wallet;
+   var isMetaMask=false;
+   $(function(){
+   
+           web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
+           if(localStorage["account_info"]!=null)
+           {
+               var m = JSON.parse(localStorage["account_info"]);
+               web3.eth.defaultAccount = m.address;
+           }
+       var infoContract = web3.eth.contract(abi);
+       cc= infoContract.at(contractAddr);
+
+   });
+
+   function tx()
+   {
+        
+           web3.eth.getTransaction($("#txhash").val(),function(err,re){
+               console.log(re);
+              
+               var str ="";
+               for(x in re)
+               {
+                 str+= x+" : "+re[x]+"<br>";
+               }
+               $("#ts0").html(str);
+           });
+           web3.eth.getTransactionReceipt($("#txhash").val(),function(err,re){
+               console.log(re);
+              
+               var str ="";
+               for(x in re)
+               {
+                 str+= x+" : "+re[x]+"<br>";
+               }
+               $("#ts1").html(str);
+           });
+   }
+
+   </script>

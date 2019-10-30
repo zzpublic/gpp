@@ -1,0 +1,72 @@
+
+<html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <meta name="Generator" content="EditPlus®">
+     <meta name="Author" content="">
+     <meta name="Keywords" content="">
+     <meta name="Description" content="">
+     <title>Balance</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   #xm .btn
+   {
+       min-width:150px;
+       margin: 5px;
+   }
+    </style>
+    </head>
+    <body style="background:#999;color:orange">
+        <div style="max-width:1000px;margin:0px auto;padding:10px 30px; background:#333">
+                   <!-- <a href="index.html">返回首页</a> -->
+                   <div class="table">
+                      <h2 align="center">账户余额</h2>
+                   </div>
+                 
+   
+                   <div class="table" style="margin-top: 50px">
+                       <input type="text" id="addr" class="form-control pull-left" placeholder="账户地址" style="max-width:500px">
+                       <input type="button" class="btn btn-info" onclick="cx()" value="查余额">
+                       
+                       <br>
+                  </div>
+                  <br>
+                  <span id="ts0"></span>
+               
+           </div>
+   
+   
+    </body>
+   </html>
+   <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+   <script src="web3.min.js"></script>
+   
+   <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"></script>
+   <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+   <script>
+   var cc;
+   var ok=false;
+   var wallet;
+   var isMetaMask=false;
+   $(function(){
+   
+           web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
+           if(localStorage["account_info"]!=null)
+           {
+               var m = JSON.parse(localStorage["account_info"]);
+               web3.eth.defaultAccount = m.address;
+           }
+   });
+
+   function cx()
+   {
+        
+           web3.eth.getBalance($("#addr").val(),function(err,re){
+               console.log(re);
+               $("#ts0").html((JSON.parse(re)/1000000000000000000).toFixed(4));
+           });
+          
+   }
+
+   </script>

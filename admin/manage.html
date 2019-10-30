@@ -1,0 +1,287 @@
+<html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <meta name="Generator" content="EditPlus®">
+     <meta name="Author" content="">
+     <meta name="Keywords" content="">
+     <meta name="Description" content="">
+     <title>Manage</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   #xm .btn
+   {
+       min-width:150px;
+       margin: 5px;
+   }
+    </style>
+    </head>
+    <body style="background:#999;color:orange">
+        <div style="max-width:1000px;margin:0px auto;padding:10px 30px; background:#333">
+                   <!-- <a href="index.html">返回首页</a> -->
+                   <p></p>
+                   <div class="table"><button class="btn btn-info" onclick="hyye(this)">合约余额</button><span></span></div>
+                   <div class="table"><button class="btn btn-info" onclick="cjz(this)">创建者</button><span></span></div>
+                   <div class="table"><button class="btn btn-info" onclick="jszc(this)">技术支持账户</button><span></span></div>
+                   <div class="table"><button class="btn btn-info" onclick="czy(this)">操作员</button><span></span></div>
+                   <div class="table"><button class="btn btn-info" onclick="tzs(this)">投资记录数</button><span></span></div>
+                   <div class="table"><button class="btn btn-info" onclick="yhs(this)">用户数</button><span></span></div>
+				   <div class="table"><button class="btn btn-info" onclick="syps(this)">剩余票数</button><span></span></div>
+				   <div class="table"><button class="btn btn-info" onclick="mpze(this)">卖票总额</button><span></span></div>
+				   <div class="table"><button class="btn btn-info" onclick="tzze(this)">投资总额</button><span></span></div>
+				   <div class="table"><button class="btn btn-info" onclick="sysc(this)">剩余时长</button><span></span></div>
+
+                   <hr>
+                   <h3>以下需要创建者或操作员才能操作</h3>
+                   <div>当前账号：<span id="dqzh"></span></div>
+                   <p></p>
+				    <p></p>
+                   <textarea id="zh" class="form-control pull-left" style="max-width: 300px" placeholder="账户数组，如['0x123456','0x456789']"></textarea>
+                   <textarea id="je" class="form-control pull-left" style="max-width: 300px" placeholder="金额数组，如[1.5,3.2]"></textarea>
+                   <div class="table"><button class="btn btn-info" onclick="zdyjj(this)">发送自定义奖金</button><span></span></div>
+
+
+                   <hr>
+                   <h3>以下需要创建者才能操作</h3>
+                   <p></p>
+                   <input type="text" id="czyzh" class="form-control pull-left" style="max-width: 300px" placeholder="操作员账户">
+                   <div class="table"><button class="btn btn-info" onclick="szczy(this)">设置操作员</button><span></span></div>
+                   <p></p>
+                   <input type="text" id="jszczh" class="form-control pull-left" style="max-width: 300px" placeholder="技术支持账户">
+                   <div class="table"><button class="btn btn-info" onclick="szjszc(this)">设置技术支持</button><span></span></div>
+                  
+
+           </div>
+   
+   
+    </body>
+   </html>
+   <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+   <script src="web3.min.js"></script>
+   
+   <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"></script>
+   <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+   <script>
+   var cc;
+   var ok=false;
+   var wallet;
+   var isMetaMask=false;
+   $(function(){
+	   if (typeof web3 !== 'undefined') {
+            isMetaMask=true;
+			metamaskinit();
+       } 
+	   else
+	   {
+        web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
+        if(localStorage["account_info"]!=null)
+        {
+            var m = JSON.parse(localStorage["account_info"]);
+            $("#dqzh").html(m.address);
+            web3.eth.defaultAccount = m.address;
+			  var infoContract = web3.eth.contract(abi);
+			cc= infoContract.at(contractAddr);
+        }
+	   }
+     
+   });
+   
+   async function metamaskinit()
+   {
+	   accounts = await ethereum.enable();
+		if(accounts.length<1)
+		{
+			if(ethereum.isMetaMask)
+			{
+				alert("已检测到MetaMask，请确认MetaMask是否已登录!");
+			}
+			else
+			{
+				alert("已检测到imtoken，请确认imtoken有eth账户!");
+			}
+			return;
+		}
+		web3.eth.defaultAccount = accounts[0];
+		$("#dqzh").html(web3.eth.defaultAccount);
+		var infoContract = web3.eth.contract(abi);
+		cc= infoContract.at(contractAddr);
+   }
+   function hyye(b)
+   {
+        cc.contractBalance(function(e, r){ $(b).next().html((JSON.parse(r)/1000000000000000000).toFixed(4));});
+   }
+   function cjz(b)
+   {
+        cc.owner(function(e, r){ $(b).next().html(r);});
+   }
+   function jszc(b)
+   {
+        cc.technology(function(e, r){ $(b).next().html(r);});
+   }
+   function czy(b)
+   {
+        cc.operator(function(e, r){ $(b).next().html(r);});
+   }
+   function tzs(b)
+   {
+        cc.investsLength(function(e, r){ $(b).next().html(JSON.parse(r));});
+   }
+   function yhs(b)
+   {
+        cc.usersLength(function(e, r){ $(b).next().html(JSON.parse(r));});
+   }
+   function syps(b)
+   {
+	   cc.owner(function(e, r){
+		cc.balanceOf(r,function(e, r2){ $(b).next().html((JSON.parse(r2)/1000000000000000000).toFixed(4));});
+	   });
+        
+   }
+   function mpze(b)
+   {
+        cc.sellTicketIncome(function(e, r){ $(b).next().html((JSON.parse(r)/1000000000000000000).toFixed(4));});
+   }
+   function tzze(b)
+   {
+        cc.investIncome(function(e, r){ $(b).next().html((JSON.parse(r)/1000000000000000000).toFixed(4));});
+   }
+
+   function sysc(b)
+   {
+	    var x = Math.round(new Date() / 1000);
+        cc.endTime(function(e, r){ $(b).next().html(formatSeconds(JSON.parse(r)-x));});
+   }
+   function cz(b,cmd)
+   {
+	    if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: 0,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 600000,
+                   gasPrice: 1000000000,
+                   value: 0,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                           $(b).next().html(hash);
+                       }
+                       else
+                       {
+                            $(b).next().html(err);
+                       }
+                   });
+               });
+           });
+		}
+   }
+
+   function szczy(b)
+   {
+        cz(b,"0xb3ab15fb000000000000000000000000"+$("#czyzh").val().substr(2));
+   }
+   function szjszc(b)
+   {
+        cz(b,"0xe046654b000000000000000000000000"+$("#jszczh").val().substr(2));
+   }
+
+   function zdyjj(b)
+   {
+       let zharr = JSON.parse($("#zh").val().replace('\n',''));
+       let jearr = JSON.parse($("#je").val().replace('\n',''));
+       let cmd = "0x3af401f6000000000000000000000000000000000000000000000000000000000000004";
+       cmd +=PrefixZero((6+zharr.length*2).toString(16),64);
+       cmd +='0';
+       cmd +=PrefixZero(zharr.length.toString(16),64);
+       for(let i=0;i<zharr.length;i++)
+       {
+            cmd +=PrefixZero(zharr[i].substr(2),64);
+       }
+       cmd +=PrefixZero(jearr.length.toString(16),64);
+       for(let i=0;i<jearr.length;i++)
+       {
+            cmd +=PrefixZero(((jearr[i]-0)*1000000000000000000).toString(16),64);
+       }
+       cz(b,cmd);
+
+   }
+
+   function PrefixZero(str, length) 
+   {
+        return (Array(length).join('0') + str).slice(-length);
+    }
+
+ 
+   function AESDecrypt(word,password) {
+       var key = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(password).toString());
+       var encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+       var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+       var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, key, {
+       mode: CryptoJS.mode.ECB,
+       padding: CryptoJS.pad.Pkcs7
+       });
+       return  decryptedData.toString(CryptoJS.enc.Utf8);
+   }
+   
+   function AESEncrypt(word,password) {
+       var key = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(password).toString());
+       var encryptedData = CryptoJS.AES.encrypt(word, key, {
+       mode: CryptoJS.mode.ECB,
+       padding: CryptoJS.pad.Pkcs7
+       });
+       return encryptedData.ciphertext.toString();
+   }
+
+	function formatSeconds(value) {
+
+	    var theTime = parseInt(value);// 秒
+	    var middle= 0;// 分
+	    var hour= 0;// 小时
+
+	    if(theTime > 60) {
+	        middle= parseInt(theTime/60);
+	        theTime = parseInt(theTime%60);
+	        if(middle> 60) {
+	            hour= parseInt(middle/60);
+	            middle= parseInt(middle%60);
+	        }
+	    }
+	    var result = ""+parseInt(theTime)+"秒";
+	    if(middle > 0) {
+	        result = ""+parseInt(middle)+"分"+result;
+	    }
+	    if(hour> 0) {
+	        result = ""+parseInt(hour)+"小时"+result;
+	    }
+	    return result;
+	}
+
+   </script>
