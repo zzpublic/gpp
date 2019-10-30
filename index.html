@@ -125,7 +125,7 @@
                 </div>
                 <div class="body">
                     <div>
-						<div align="center" id="zh" style="text-decoration:underline;font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
+						<div align="center" id="zh" style="font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
                        <div>
                             <p>账户ETH余额：<span id="zhye">0</span> ETH</p>
                         </div>
@@ -165,13 +165,9 @@
                 </div>
             </div>
             <div class="invite">
-                <div class="is_invite">
-                    <img src="image/index/matrix.png"/>
-                    <p>未参与</p>
-                </div>
                 <p class="text">邀请链接</p>
                 <div class="linkurl" style="color: #ccc;text-align: center;"></div>
-                <div class="inline-div link linkcode">参与后即可生成自己的邀请码</div>
+                <div class="inline-div link">点击复制</div>
             </div>
             <div class="inline-div preachers_reward  ">
                 <div class="title">
@@ -476,29 +472,30 @@
        } 
 	   else
 	   {
-			   web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
-			   if(localStorage["account_info"]!=null)
-			   {
-				   var m = JSON.parse(localStorage["account_info"]);
-				   $("#zh").html(m.address);
-				   web3.eth.defaultAccount = m.address;
-				   getBalance();setInterval(getBalance,10000);
-
-			   }
-			   else
-			   {
-					web3.eth.defaultAccount=null;
-			   }
-			   if(localStorage["account_uid"]!=null)
-			   {
-				   myuid = JSON.parse(localStorage["uid"]);
-			   }
-			   var infoContract = web3.eth.contract(abi);
-			   cc= infoContract.at(contractAddr);
-			   getContractBalance();
-			   setInterval(getContractBalance,15000);
-			   setInterval(djs,1000);
-			   getu();
+            alert("未检测到MetaMask或Imtoken，请确认使用MetaMask或Imtoken");
+            return;
+            web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
+            if(localStorage["account_info"]!=null)
+            {
+                var m = JSON.parse(localStorage["account_info"]);
+                $("#zh").html(m.address);
+                web3.eth.defaultAccount = m.address;
+                getBalance();setInterval(getBalance,10000);
+            }
+            else
+            {
+                web3.eth.defaultAccount=null;
+            }
+            if(localStorage["account_uid"]!=null)
+            {
+                myuid = JSON.parse(localStorage["uid"]);
+            }
+            var infoContract = web3.eth.contract(abi);
+            cc= infoContract.at(contractAddr);
+            getContractBalance();
+            setInterval(getContractBalance,15000);
+            setInterval(djs,1000);
+            getu();
 	   }
    });
    async function metamaskinit()
@@ -940,10 +937,7 @@
                             //console.log(result2);
                             if(result2[0]==web3.eth.defaultAccount.toLowerCase())
 							{
-                                myuid= i;
-								$(".is_invite").hide();
-                                $(".linkcode").html("您的邀请码: "+(myuid+10001));
-                                $(".linkurl").html("https://qbank.wotrack.com/?code="+(myuid+10001));
+                                myuid= i;               
 								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
 								$("#yjsy").html((result2[2]/1000000000000000000).toFixed(4)*3);
 								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
