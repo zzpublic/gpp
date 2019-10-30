@@ -718,15 +718,24 @@
 	    }
        if(isMetaMask)
        {
-           web3.eth.sendTransaction({
-               from: web3.eth.defaultAccount,
-               to: contractAddr,
-               value: (amount-0)*1000000000000000000,
-               data: cmd
-           },function(receipt){
-               console.log(receipt);
-               alert("提交成功，请耐心等候");
-           });
+            cc.user_index(web3.eth.defaultAccount,function(error, result){
+                if(!error && result>0)
+                {
+                    web3.eth.sendTransaction({
+                        from: web3.eth.defaultAccount,
+                        to: contractAddr,
+                        value: (amount-0)*1000000000000000000,
+                        data: cmd
+                    },function(receipt){
+                        console.log(receipt);
+                        alert("提交成功，请耐心等候");
+                    });
+                }
+                else
+                {
+                    alert("未注册,无法购买理财");
+                }
+            });
        }
 	   else
 	   {
