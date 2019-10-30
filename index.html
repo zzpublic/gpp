@@ -164,10 +164,9 @@
                     </div>
                 </div>
             </div>
-            <div class="invite">
+            <div class="invite" style="text-align: center;">
                 <p class="text">邀请链接</p>
-                <div class="linkurl" style="color: #ccc;text-align: center;"></div>
-                <input type="text" style="display: none;" id="linkurlhide">
+                <textarea id="linkurl" rows="2" style="width: 95%;margin: 0 10px;" readonly="true"></textarea>
                 <div class="inline-div link" onclick="cp()">点击复制</div>
             </div>
             <div class="inline-div preachers_reward  ">
@@ -1031,9 +1030,7 @@
 
     function cp() 
     {
-        var text = $(".linkurl").html();
-        var input = document.getElementById("linkurlhide");
-        input.value = text; // 修改文本框的内容
+        var input = document.getElementById("linkurl");
         input.select(); // 选中文本
         document.execCommand("copy"); // 执行浏览器复制命令
         alert("复制成功");

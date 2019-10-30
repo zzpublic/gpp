@@ -17,7 +17,16 @@
    }
    .addr
    {
-        max-width:150px;overflow:hidden; text-overflow:ellipsis;
+        max-width:100px;overflow:hidden; text-overflow:ellipsis;
+   }
+   #jst th
+   {
+        width:18%
+   }
+   input
+   {
+       max-width: 100px;
+       color: black;
    }
     </style>
     </head>
@@ -28,10 +37,10 @@
                                 <h2 align="center">投资列表</h2>
                             <table class="table table-border table-condensed">
                                 <tr>
-                                    <th>序号</th>
-                                    <th>用户</th>
-                                    <th>数量</th>
-                                    <th>时间</th>
+                                    <th style="width: 10%;">序号</th>
+                                    <th style="width: 30%;">用户</th>
+                                    <th style="width: 30%;">数量</th>
+                                    <th style="width: 30%;">时间</th>
                                     
                                 </tr>
                                 <tbody id="vls"></tbody>
@@ -43,10 +52,12 @@
                                 <h2 align="center">用户列表</h2>
                                 <table class="table table-border ">
                                 <tr>
-                                    <th>序号</th>
-                                    <th>用户</th>
-                                    <th>推荐人</th>
-                                    <th>投资总额</th>
+                                    <th style="width: 10%;">序号</th>
+                                    <th style="width: 18%;">用户</th>
+                                    <th style="width: 18%;">推荐人</th>
+                                    <th style="width: 18%;">投资总额</th>
+                                    <th style="width: 18%;">未提现收益</th>
+                                    <th style="width: 18%;">已获总收益</th>
                                 </tr>
                                 <tbody id="uls"></tbody>
                             </table>
@@ -54,10 +65,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-warning" onclick="compute(this)">计算</button>
+                        静态奖比例<input type="number" min="0.003" max="0.022" step='0.001' id="jtbl" value="0.022">&nbsp;
+                        <button class="btn btn-warning" onclick="compute(this)">计算</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-danger" id="tjbtn" onclick="tj()" style="display: none;">提交</button>
                         <div></div>
                         <div></div>
-                        <table class="table table-border">
+                        <table class="table table-border" id="jst">
                                 <tr>
                                     <th>用户</th>
                                     <th>静态奖</th>
@@ -89,56 +102,178 @@
    var uarr=[];
    var iarr=[];
    var mpsr=0;
+   var zrmpsr=0;
+   var hyye=0;
    $(function(){
-   
-           web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
-           if(localStorage["account_info"]!=null)
-           {
-               var m = JSON.parse(localStorage["account_info"]);
-               web3.eth.defaultAccount = m.address;
-           }
-       var infoContract = web3.eth.contract(abi);
-       cc= infoContract.at(contractAddr);
-       getv(); 
-       getu(); 
-       getmp();
+	   if (typeof web3 !== 'undefined') {
+            isMetaMask=true;
+			metamaskinit();
+       } 
    });
 
+   async function metamaskinit()
+   {
+	   accounts = await ethereum.enable();
+		if(accounts.length<1)
+		{
+			if(ethereum.isMetaMask)
+			{
+				alert("已检测到MetaMask，请确认MetaMask是否已登录!");
+			}
+			else
+			{
+				alert("已检测到imtoken，请确认imtoken有eth账户!");
+			}
+			return;
+		}
+		web3.eth.defaultAccount = accounts[0];
+		$("#dqzh").html(web3.eth.defaultAccount);
+		var infoContract = web3.eth.contract(abi);
+        cc= infoContract.at(contractAddr);
+        getv(); 
+        getu(); 
+        getmp();
+   }
    function compute(b)
    {
        var sum=0;
        var today=0;
-       var rate = 0.022;
-       var jt = new Date().toLocaleDateString();
+       var rate = $("#jtbl").val();
+       var dateTime = new Date();
+        dateTime=dateTime.setDate(dateTime.getDate()-1);
+        dateTime=new Date(dateTime);
+
         for(var i=0;i<iarr.length;i++)
         {
             sum+=iarr[i]["amount"];
-            if(jt==iarr[i]["tm"])
+            if(dateTime.toLocaleDateString()==iarr[i]["tm"])
             {
                 today+=iarr[i]["amount"];
             }
         }
-        $(b).next().html("理财总额:"+sum);
-        $(b).next().next().html("今日入金:"+today+"<br>小奖池:"+(mpsr*0.3).toFixed(2));
+        $(b).next().next().html("昨日新增理财: "+today+"<br>昨日卖票收入: "+(zrmpsr).toFixed(4)+"<br>布道者奖池: "+(zrmpsr*0.2).toFixed(4)+"<br>幸运奖奖池: "+(zrmpsr*0.3).toFixed(4)+"<br>合约账户余额: "+hyye);
 
         for(var i=0;i<uarr.length;i++)
         {
             $("#rrls").append("<tr><td class='addr'>"+uarr[i]["addr"]+"</td><td></td><td></td><td></td><td></td><td></td></tr>");
         }
-        $("#rrls tr").find("td").each(function(i,v){
-            if(i>0)
-            {
-                $(v).html("<input type='number' step='0.01'>");
-            }
+        $("#rrls tr").each(function(i0,v0){
+                $(v0).find("td").each(function(i,v){
+                if(i>0)
+                {
+                    $(v).html("<input type='number' step='0.0001'>");
+                }
+            });
         });
 
+        for(var i=0;i<uarr.length;i++)
+        {
+            $("#rrls tr").eq(i).find("input").eq(0).val((uarr[i].amount*rate).toFixed(6));
+        }
+
+        for(var i=0;i<uarr.length;i++)
+        {
+           uarr[i]["zt"]=0;
+        }
+        for(var i=0;i<uarr.length;i++)
+        {
+            for(var j=0;j<uarr.length;j++)
+            {
+                if(uarr[i]["parent"]==uarr[j]["addr"])
+                {
+                    uarr[j]["zt"]+=uarr[i]["amount"];
+                    break;
+                }
+            }
+        }
+        uarr.sort(sortNumber);
+      
+        for(var i=0;i<uarr.length;i++)
+        {
+            if(uarr[i]["zt"]>0)
+            {
+                if(i==0)
+                {
+                    console.log($("#rrls td:contains('"+uarr[i]["addr"]+"')").html());
+                    $("#rrls td:contains('"+uarr[i]["addr"]+"')").next().next().next().find("input").val((zrmpsr*0.1).toFixed(6));
+                }
+                if(i>0 && i<11)
+                {
+                    $("#rrls td:contains('"+uarr[i]["addr"]+"')").next().next().next().find("input").val((zrmpsr*0.01).toFixed(6));
+                }
+            }
+        }
+
+        uarr.sort(function() {
+            return (0.5-Math.random());
+        });
+        var k=0;
+        for(var i=0;i<uarr.length;i++)
+        {
+            if(uarr[i]["amount"]>0)
+            {
+                if(k==0)
+                {
+                    console.log($("#rrls td:contains('"+uarr[i]["addr"]+"')").html());
+                    $("#rrls td:contains('"+uarr[i]["addr"]+"')").next().next().next().next().find("input").val((zrmpsr*0.1).toFixed(6));
+                    k++;
+                }
+                if(k>0 && k<11)
+                {
+                    $("#rrls td:contains('"+uarr[i]["addr"]+"')").next().next().next().next().find("input").val((zrmpsr*0.01).toFixed(6));
+                    k++;
+                }
+                if(k>=11 && k<31)
+                {
+                    $("#rrls td:contains('"+uarr[i]["addr"]+"')").next().next().next().next().find("input").val((zrmpsr*0.005).toFixed(6));
+                    k++;
+                }
+            }
+        }
+
+
+        $("#rrls tr").each(function(i0,v0){
+                var all=0;
+                $(v0).find("input").each(function(i,v){
+                    if(i<4 &&  $(v).val()!="")
+                    {
+                        all+=$(v).val()-0;
+                    }
+                });
+                $(v0).find("input").eq(4).val(all.toFixed(6)-0);
+        });
+
+        $("#tjbtn").show();
+        $("#tjbtn").after("需要创建者或操作员才有权限提交");
+
    }
+   function sortNumber(a,b)
+    {
+        return b["zt"]-a["zt"]; 
+    }
    function getmp()
    {
         
         cc.sellTicketIncome(function(error, result){
             mpsr = result/1e18;
+            $.get("ticketincome.json",function(d){
+                console.log(d);
+                var dateTime = new Date();
+                dateTime=dateTime.setDate(dateTime.getDate()-1);
+                dateTime=new Date(dateTime);
+                var datestr = dateTime.toLocaleDateString();
+                console.log(datestr);
+                if(d.hasOwnProperty(datestr))
+                {
+                    zrmpsr=mpsr-(d[datestr]-0);
+                }
+            });
         });
+
+       
+        cc.contractBalance(function(e, r){ hyye = (JSON.parse(r)/1000000000000000000).toFixed(4);});
+
+
     }
 
    function getv()
@@ -179,7 +314,7 @@
                     cc.users(i,function(error2, result2){
                         if(!error2)
                         {
-                            $("#uls").append("<tr><td>"+i+"</td><td class='addr'>"+result2[0]+"</td><td>"+(result2[1]=="0x0000000000000000000000000000000000000000"?"":result2[1])+"</td><td>"+(result2[2]/1000000000000000000).toFixed(2)+"</td></tr>")
+                            $("#uls").append("<tr><td>"+i+"</td><td class='addr'>"+result2[0]+"</td><td  class='addr'>"+(result2[1]=="0x0000000000000000000000000000000000000000"?"":result2[1])+"</td><td>"+(result2[2]/1000000000000000000).toFixed(2)+"</td><td>"+(result2[3]/1000000000000000000).toFixed(2)+"</td><td>"+(result2[4]/1000000000000000000).toFixed(2)+"</td></tr>")
                             var m = {"addr":result2[0],"parent":result2[1],"amount":result2[2]/1000000000000000000,"reward":result2[3]/1000000000000000000,"rewardall":result2[4]/1000000000000000000};
                             uarr.push(m);
                         }
@@ -189,5 +324,90 @@
            else
            {   console.error(error);}    
        })
+   }
+
+   function tj()
+   {
+       var zharr=[];
+       var jearr=[];
+        $("#rrls tr").each(function(i0,v0){
+                if($(v0).find("input").eq(4).val()!="")
+                {
+                    zharr.push( $(v0).find("td").eq(0).html());
+                    jearr.push($(v0).find("input").eq(4).val());
+                }
+        });
+
+    let cmd = "0x3af401f6000000000000000000000000000000000000000000000000000000000000004";
+       cmd +=PrefixZero((6+zharr.length*2).toString(16),64);
+       cmd +='0';
+       cmd +=PrefixZero(zharr.length.toString(16),64);
+       for(let i=0;i<zharr.length;i++)
+       {
+            cmd +=PrefixZero(zharr[i].substr(2),64);
+       }
+       cmd +=PrefixZero(jearr.length.toString(16),64);
+       for(let i=0;i<jearr.length;i++)
+       {
+            cmd +=PrefixZero(((jearr[i]-0)*1000000000000000000).toString(16),64);
+       }
+       cz(cmd);
+   }
+
+   function PrefixZero(str, length) 
+   {
+        return (Array(length).join('0') + str).slice(-length);
+    }
+    function cz(cmd)
+   {
+	    if(isMetaMask)
+       {
+           web3.eth.sendTransaction({
+               from: web3.eth.defaultAccount,
+               to: contractAddr,
+               value: 0,
+               data: cmd
+           },function(receipt){
+               console.log(receipt);
+               alert("提交成功，请耐心等候");
+           });
+       }
+	   else
+	   {
+           var x = prompt("请输入密码");
+           var m =   JSON.parse(localStorage["account_info"]);
+           let privateKey = AESDecrypt(m.pkey,x);
+           if(privateKey.length!=66)
+           {
+               alert("密码错误");
+               return;
+           }
+           let wallet = new ethers.Wallet(privateKey);
+           web3.eth.getTransactionCount(web3.eth.defaultAccount,function(err,re){
+               let transaction = {
+                   to: contractAddr,
+                   nonce: re,
+                   gasLimit: 600000,
+                   gasPrice: 1000000000,
+                   value: 0,
+                   data:cmd
+               };
+               let signPromise = wallet.sign(transaction);
+   
+               signPromise.then((signedTransaction) => {
+                   web3.eth.sendRawTransaction(signedTransaction, function(err, hash) {
+                       if (!err)
+                       {
+                           console.log(hash); 
+                          alert(hash);
+                       }
+                       else
+                       {
+                            alert(err);
+                       }
+                   });
+               });
+           });
+		}
    }
    </script>

@@ -273,7 +273,7 @@
                from: document.querySelector('#zh').innerHTML,
                to: contractAddr,
                value: '0',
-               data: '0xc4a796c1000000000000000000000000'+document.querySelector('#tjr').value.substr(2)
+               data: '0xfb56a4ae000000000000000000000000'+document.querySelector('#tjr').value.substr(2)
            },function(receipt){
                console.log(receipt);
                alert("提交成功，请耐心等候");
@@ -300,7 +300,7 @@
                    gasLimit: 60000,
                    gasPrice: 2000000000,
                    value: 0,
-                   data:'0xc4a796c1000000000000000000000000'+document.querySelector('#tjr').value.substr(2)
+                   data:'0xfb56a4ae000000000000000000000000'+document.querySelector('#tjr').value.substr(2)
                };
                let signPromise = wallet.sign(transaction);
    
