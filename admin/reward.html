@@ -15,6 +15,10 @@
        min-width:150px;
        margin: 5px;
    }
+   .addr
+   {
+        max-width:150px;overflow:hidden; text-overflow:ellipsis;
+   }
     </style>
     </head>
     <body style="background: #333333;;color:rgb(248, 213, 148)">
@@ -119,7 +123,7 @@
 
         for(var i=0;i<uarr.length;i++)
         {
-            $("#rrls").append("<tr><td>"+uarr[i]["addr"]+"</td><td></td><td></td><td></td><td></td><td></td></tr>");
+            $("#rrls").append("<tr><td class='addr'>"+uarr[i]["addr"]+"</td><td></td><td></td><td></td><td></td><td></td></tr>");
         }
         $("#rrls tr").find("td").each(function(i,v){
             if(i>0)
@@ -150,7 +154,7 @@
                     cc.invests(i,function(error2, result2){
                         if(!error2)
                         {
-                            $("#vls").append("<tr><td>"+i+"</td><td>"+result2[0]+"</td><td>"+(result2[1]/1000000000000000000).toFixed(2)+"</td><td>"+(new Date(result2[2]*1000).toLocaleString())+"</td></tr>");
+                            $("#vls").append("<tr><td>"+i+"</td><td class='addr'>"+result2[0]+"</td><td>"+(result2[1]/1000000000000000000).toFixed(2)+"</td><td>"+(new Date(result2[2]*1000).toLocaleString())+"</td></tr>");
                             var m = {"addr":result2[0],"amount":result2[1]/1000000000000000000,"tm":new Date(result2[2]*1000).toLocaleDateString()};
                             iarr.push(m);
                         }
@@ -175,7 +179,7 @@
                     cc.users(i,function(error2, result2){
                         if(!error2)
                         {
-                            $("#uls").append("<tr><td>"+i+"</td><td>"+result2[0]+"</td><td>"+(result2[1]=="0x0000000000000000000000000000000000000000"?"":result2[1])+"</td><td>"+(result2[2]/1000000000000000000).toFixed(2)+"</td></tr>")
+                            $("#uls").append("<tr><td>"+i+"</td><td class='addr'>"+result2[0]+"</td><td>"+(result2[1]=="0x0000000000000000000000000000000000000000"?"":result2[1])+"</td><td>"+(result2[2]/1000000000000000000).toFixed(2)+"</td></tr>")
                             var m = {"addr":result2[0],"parent":result2[1],"amount":result2[2]/1000000000000000000,"reward":result2[3]/1000000000000000000,"rewardall":result2[4]/1000000000000000000};
                             uarr.push(m);
                         }
