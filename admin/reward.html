@@ -6,7 +6,7 @@
      <meta name="Author" content="">
      <meta name="Keywords" content="">
      <meta name="Description" content="">
-     <title>Invest</title>
+     <title>Reward</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
                    <div class="col-md-6">
                         <div>
                                 <h2 align="center">投资列表</h2>
-                            <table class="table table-border">
+                            <table class="table table-border table-condensed">
                                 <tr>
                                     <th>序号</th>
                                     <th>用户</th>
@@ -37,7 +37,7 @@
                         <hr>
                         <div>
                                 <h2 align="center">用户列表</h2>
-                                <table class="table table-border">
+                                <table class="table table-border ">
                                 <tr>
                                     <th>序号</th>
                                     <th>用户</th>
@@ -58,6 +58,9 @@
                                     <th>用户</th>
                                     <th>静态奖</th>
                                     <th>团队奖</th>
+                                    <th>布道者</th>
+                                    <th>幸运奖</th>
+                                    <th>合计</th>
                                 </tr>
                                 <tbody id="rrls"></tbody>
                         </table>
@@ -113,7 +116,8 @@
 
         for(var i=0;i<uarr.length;i++)
         {
-            $("#rrls").append("<tr><td>"+uarr[i]["addr"]+"</td><td>"+today*0.022/uarr[i].amount+"</td><td>0</td></tr>");
+            console.log(today,uarr[i].amount,today*0.022,today*0.022/uarr[i].amount);
+            $("#rrls").append("<tr><td>"+uarr[i]["addr"]+"</td><td>"+today*0.022/uarr[i].amount+"</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>");
         }
    }
 
