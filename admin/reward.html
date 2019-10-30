@@ -84,6 +84,7 @@
    var isMetaMask=false;
    var uarr=[];
    var iarr=[];
+   var mpsr=0;
    $(function(){
    
            web3 = new Web3(new Web3.providers.HttpProvider(nodeurl)); 
@@ -96,12 +97,14 @@
        cc= infoContract.at(contractAddr);
        getv(); 
        getu(); 
+       getmp();
    });
 
    function compute(b)
    {
        var sum=0;
        var today=0;
+       var rate = 0.022;
        var jt = new Date().toLocaleDateString();
         for(var i=0;i<iarr.length;i++)
         {
@@ -112,14 +115,27 @@
             }
         }
         $(b).next().html("理财总额:"+sum);
-        $(b).next().next().html("今日入金:"+today);
+        $(b).next().next().html("今日入金:"+today+"<br>小奖池:"+(mpsr*0.3).toFixed(2));
 
         for(var i=0;i<uarr.length;i++)
         {
-            console.log(today,uarr[i].amount,today*0.022,today*0.022/uarr[i].amount);
-            $("#rrls").append("<tr><td>"+uarr[i]["addr"]+"</td><td>"+today*0.022/uarr[i].amount+"</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>");
+            $("#rrls").append("<tr><td>"+uarr[i]["addr"]+"</td><td></td><td></td><td></td><td></td><td></td></tr>");
         }
+        $("#rrls tr").find("td").each(function(i,v){
+            if(i>0)
+            {
+                $(v).html("<input type='number' step='0.01'>");
+            }
+        });
+
    }
+   function getmp()
+   {
+        
+        cc.sellTicketIncome(function(error, result){
+            mpsr = result/1e18;
+        });
+    }
 
    function getv()
    {
