@@ -167,7 +167,8 @@
             <div class="invite">
                 <p class="text">邀请链接</p>
                 <div class="linkurl" style="color: #ccc;text-align: center;"></div>
-                <div class="inline-div link">点击复制</div>
+                <input type="hidden" id="linkurlhide">
+                <div class="inline-div link" onclick="cp()">点击复制</div>
             </div>
             <div class="inline-div preachers_reward  ">
                 <div class="title">
@@ -515,6 +516,7 @@
 		}
 		web3.eth.defaultAccount = accounts[0];
         $("#zh").html(web3.eth.defaultAccount);
+        $("#linkurl").html("https://zzpublic.github.io/gpp/?r="+web3.eth.defaultAccount);
         getBalance();setInterval(getBalance,10000);
 
 		var infoContract = web3.eth.contract(abi);
@@ -990,6 +992,16 @@
                 var argname=pairs[i].substring(0,pos);//提取name   
                 var value=pairs[i].substring(pos+1);//提取value   
                 args[argname]=unescape(value);//存为属性   
+        }
+
+        function cp() 
+        {
+            var text = $(".linkurl").html();
+            var input = document.getElementById("linkurlhide");
+            input.value = text; // 修改文本框的内容
+            input.select(); // 选中文本
+            document.execCommand("copy"); // 执行浏览器复制命令
+            alert("复制成功");
         }
         return args;
     }
