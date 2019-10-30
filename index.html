@@ -993,17 +993,17 @@
                 var value=pairs[i].substring(pos+1);//提取value   
                 args[argname]=unescape(value);//存为属性   
         }
-
-        function cp() 
-        {
-            var text = $(".linkurl").html();
-            var input = document.getElementById("linkurlhide");
-            input.value = text; // 修改文本框的内容
-            input.select(); // 选中文本
-            document.execCommand("copy"); // 执行浏览器复制命令
-            alert("复制成功");
-        }
         return args;
+    }
+
+    function cp() 
+    {
+        var text = $(".linkurl").html();
+        var input = document.getElementById("linkurlhide");
+        input.value = text; // 修改文本框的内容
+        input.select(); // 选中文本
+        document.execCommand("copy"); // 执行浏览器复制命令
+        alert("复制成功");
     }
 </script>
 </html>
