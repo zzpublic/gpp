@@ -15,21 +15,26 @@
        min-width:150px;
        margin: 5px;
    }
+   .bb
+   {
+    display:block; width:30%;height:200px; font-size: 25px; color:white;margin: 30px;float: left;
+    background: #999;
+   }
     </style>
     </head>
     <body style="background:#999;color:orange">
-           <div style="max-width:1000px;margin:0px auto;padding:10px 30px; background:#333">
+           <div style="max-width:1000px;min-height:600px;margin:0px auto;padding:10px 30px; background:#333">
                     <div>
                         <!-- <ul style="float: right">
                             <li><a  href='tx.html' target="_blank" >ETH交易</a></li>
                             <li><a  href='txinfo.html'  target="_blank">交易详情</a></li>
                             <li><a  href='balance.html'  target="_blank">查询余额</a></li>
                         </ul> -->
-                        <ul style="float: right">  
-                            <!-- <li><a  href='invest.html'  target="_blank">投资列表</a></li> -->
+                        <!-- <ul style="float: right">  
+                            <li><a  href='invest.html'  target="_blank">投资列表</a></li>
                             <li><a  href='reward.html'  target="_blank">投资/用户/奖金</a></li>
                             <li><a   href='manage.html'  target="_blank">系统管理</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div style="clear: both"></div>
                    <div class="table" >
@@ -70,29 +75,35 @@
                    </div>
    
    
-   
-                   <div class="table" style="margin-top: 50px">
-                       <input type="text" id="tjr" class="form-control pull-left" style="max-width: 400px" placeholder="填写推荐人地址，只能绑定一次推荐人">
-                       <input type="button" class="btn   btn-info" onclick="registe()" value="提交推荐人">
-                  </div>
-                  <div style="color:#999">下级定期投资推荐人可以获得推荐奖，直接推荐人获得定期投资额的10%</div>
-                  <br><span id="ts0"></span>
+                   <div style="display: none;">
+                        <div class="table" style="margin-top: 50px">
+                                <input type="text" id="tjr" class="form-control pull-left" style="max-width: 400px" placeholder="填写推荐人地址，只能绑定一次推荐人">
+                                <input type="button" class="btn   btn-info" onclick="registe()" value="提交推荐人">
+                        </div>
+                        <div style="color:#999">下级定期投资推荐人可以获得推荐奖，直接推荐人获得定期投资额的10%</div>
+                        <br><span id="ts0"></span>
+        
+        
+                            <span id="ts11"></span>
+                            <div class="table"   style="margin-bottom: 50px">
+                                <input type="number" id="ps" class="form-control pull-left" style="max-width: 400px" placeholder="填写购买GPP数量">
+                                <input type="button" class="btn  btn-info" onclick="buyticket()" value="提交购买"><br>
+                        </div>
+                        <span id="ts10"></span>
+                        
+                        
+                        
+                        <div class="table"   style="margin-bottom: 50px">
+                                <input type="number" id="tze" class="form-control pull-left" style="max-width: 400px" placeholder="填写投资金额">
+                                <input type="button" class="btn  btn-info" onclick="invest()" value="提交投资"><br>
+                        </div>
+                        <span id="ts"></span>
+                   </div>
 
+                  <a  href='reward.html'  target="_blank" class="btn btn-info btn-block">投资/用户/奖金</a><p></p>
+                  <a   href='manage.html'  target="_blank" class="btn btn-primary btn-block">系统管理</a>
 
-					<span id="ts11"></span>
-                   <div class="table"   style="margin-bottom: 50px">
-                       <input type="number" id="ps" class="form-control pull-left" style="max-width: 400px" placeholder="填写购买GPP数量">
-                       <input type="button" class="btn  btn-info" onclick="buyticket()" value="提交购买"><br>
-                  </div>
-                  <span id="ts10"></span>
-				  
-				  
-				  
-                  <div class="table"   style="margin-bottom: 50px">
-                       <input type="number" id="tze" class="form-control pull-left" style="max-width: 400px" placeholder="填写投资金额">
-                       <input type="button" class="btn  btn-info" onclick="invest()" value="提交投资"><br>
-                  </div>
-                  <span id="ts"></span>
+                 
            </div>
    
    
