@@ -607,7 +607,7 @@
 
 		var x = Math.round(new Date() / 1000);
 		
-        cc.endTime(function(e, r){ syms=JSON.parse(r)-x; if(syms<0){syms+=100000;} $("#djs").html(formatSeconds(syms));});
+        cc.endTime(function(e, r){ syms=JSON.parse(r)-x; if(syms<0){syms=0;} $("#djs").html(formatSeconds(syms));});
 
 		cc.sellTicketCount(function(e, r){ 
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
@@ -710,7 +710,7 @@
    
        var cmd = "0xe8b5e51f";
 	    var amount = $("#gmlc").val();
-	   if((amount-0)>($("#zhmpyr").html()-0))
+	   if((amount-0)*rate*0.1>($("#zhmpyr").html()-0))
 	   {
 		   alert("门票余额不足");
 		   return;
@@ -842,16 +842,14 @@
    }
    function tx()
    {
-   
-       var cmd = "0x3ccfd60b";
        var amount = 0;
 	   if(isMetaMask)
        {
            web3.eth.sendTransaction({
                from: web3.eth.defaultAccount,
                to: contractAddr,
-               value: (amount-0)*1000000000000000000,
-               data: cmd
+               value: 0,
+               data: ""
            },function(receipt){
                console.log(receipt);
                alert("提交成功，请耐心等候");
@@ -877,7 +875,7 @@
                    gasLimit: 300000,
                    gasPrice: 1000000000,
                    value: (amount-0)*1000000000000000000,
-                   data:cmd
+                   data:""
                };
                let signPromise = wallet.sign(transaction);
    
@@ -1009,7 +1007,7 @@
 	}
 	function jseth2(x)
    {
-		$("#xymp").html(x*rate); 
+		$("#xymp").html(x*rate*0.1); 
     }
     
     function GetUrlParms()    
