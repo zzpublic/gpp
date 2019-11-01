@@ -12,6 +12,10 @@
         {
             color: #ddd;
         }
+        .fxaddr
+        {
+             max-width:120px;overflow:hidden; text-overflow:ellipsis;
+        }
     </style>
 </head>
 <body style="background-color: #000">
@@ -19,7 +23,7 @@
     <div id="app">
         <header id="p_h">
 			<!-- <i style="font-size:20px;color:rgba(255,255,255,0.6);margin:10px;position:absolute" class="user glyphicon glyphicon-user" onclick="location='user.html'"/></i> -->
-            <img class="banner" src="image/index/banner.png">
+            <img class="banner" src="http://qbank.wotrack.com/image/index/banner.png">
             <img class="language" src="image/index/language.png" onclick="$('.language-div').toggle()"/>
 			
             <div class="language-div">
@@ -49,7 +53,7 @@
                 <div class="body">
                     <div class="left">
                         <div>
-                            <button>小奖池</button>
+                            <button>幸运池</button>
                             <span onclick="model('award')">开奖记录</span>
                         </div>
                         <div>
@@ -59,7 +63,7 @@
                     </div>
                     <div class="right">
                         <div>
-                            <button>大奖池</button>
+                            <button>保险池</button>
                         </div>
                         <div>
                             <span id="djc"></span> ETH
@@ -398,7 +402,7 @@
                             <td>业绩</td>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="wdfx">
                         <!-- <tr>
                             <td>15235201306</td>
                             <td>0.2155 ETH</td>
@@ -1141,6 +1145,7 @@
 							{
                                 tjrs++;
                                 $("#tjrs").html(tjrs);
+                                $("#wdfx").append("<tr><td class='fxaddr'>"+result2[0]+"</td><td>"+((result2[2]/1e18).toFixed(4)-0)+"</td><td>"+((result2[2]/1e18).toFixed(4)-0)+"</td></tr>");
                             }
                         }
                       
