@@ -8,13 +8,10 @@
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-    @media screen and (max-width: 376px) {
-    .xq
-    {
-        margin-right:0px !important;
-        padding: 0 5px !important;
-    }
-}
+        a
+        {
+            color: #ddd;
+        }
     </style>
 </head>
 <body style="background-color: #000">
@@ -83,7 +80,7 @@
                     <div class="item">
                         <div class="row-div">
                             <span>1:<span id="dhbl"></span></span>
-                            <button onclick="model('ticket')">购买门票</button>
+                            <button onclick="model('ticket')">兑换</button>
                         </div>
                         <div class="row-div">
                             <div class="progress progress-striped" style="width: 70%;height: 5px;margin: 0;">
@@ -92,7 +89,7 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余门票：<span id="symp"></span></span>
+                            <span class="num">剩余额度：<span id="symp"></span></span>
                         </div>
                     </div> 
 					<div class="item">
@@ -106,7 +103,7 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余门票：<span id="symp2"></span></span>
+                            <span class="num">剩余额度：<span id="symp2">200 eth</span></span>
                         </div>
                         <!-- <div class="num2">剩余轮数:<span></span>10轮</div> -->
                     </div> 
@@ -121,7 +118,7 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余门票：<span id="symp3">10000</span></span>
+                            <span class="num">剩余额度：<span id="symp3">200 eth</span></span>
                         </div>
                         <!-- <div class="num2">剩余轮数:<span>10</span>轮</div> -->
                     </div> 
@@ -135,16 +132,17 @@
                         <img src="image/index/question.png" onclick="model('user')"/>
                     </div>
                 </div>
-                <div class="body">
+                <div class="body" style="position: relative;">
                     <div>
-                        <div align="center" id="zh" style="font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
-                        <div><p style="display:block;max-width:250px;overflow:hidden; text-overflow:ellipsis;">我的推荐人：<span id="tjr" ></span></p></div>
+                        <div align="center" id="zh" style="font-size:20px;color:#fff; max-width:350px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
+                        <div><p style="display:block;max-width:300px;overflow:hidden; text-overflow:ellipsis;">我的推荐人：<span id="tjr" ></span></p></div>
                         <div><p>账户ETH余额：<span id="zhye">0</span> ETH</p></div>
 						<p>我的等级：<span>V0</span></p>
                         <p>我的分享：<span>0</span> （人）</p>
                         <p>团队业绩：<span>0</span> ETH</p>
+                        <p>我的邀请链接：<input id="linkurl" style="width:55%;border:0px solid transparent; background:transparent;">&nbsp;&nbsp;<a style="color: #FFF77A;" href="javascript:cp()">复制</a></p>
                     </div>
-                    <div>
+                    <div style="position: absolute; right:10px; top:100px;">
                         <button onclick="model('share')" class="xq">详情</button>
                     </div>
                 </div>
@@ -159,30 +157,28 @@
                 <div class="body">
                     <div class="balance">
                         <div>
-                            <p>理财账户余额：</p>
-                            <p><span id="lczhye">0</span> ETH</p>
+                                <div class="num" style="font-size: 18px;color: #ddd;"><input type="number" value="" id="gmlc" oninput="jseth2(this.value)"  style="width: 125px;border: none;border-bottom: 1px solid #ddd;background-color: transparent;">ETH</div>
+                                <div class="need"  style="font-size: 16px;color: #ddd;margin-top:10px;">需要门票：<span id="xymp"></span>  </div>
                         </div>
                         <div>
-                            <button onclick="model('contact')">购买理财</button>
-                            <p class="apply" onclick="model('withdraw')">申请提现</p>
+                            <button onclick="invest()">立即参与</button>
                         </div>
                     </div>
-                    <div class="earnings">
+                    <div class="earnings" style="position: relative;">
                         <div>
+                            <p>理财账户余额：<span id="lczhye">0</span> ETH</p>
                             <p>预计可获得收益：<span id="yjsy">0</span> ETH</p>
                             <p>已累计获得收益：<span id="yhsy">0</span> ETH</p>
                             <p>出局剩余可收益：<span  id="sysy">0</span> ETH</p>
+                            <p>账户可提现收益：<span  id="ktxsy">0</span> ETH</p>
                             <p>账户门票余额：<span  id="zhmpyr">0</span></p>
                         </div>
-                       
+                        <div style="position: absolute;right: 10px; top:140px"> <button onclick="model('withdraw')">申请提现</button></div>
+                        <div style="position: absolute;right: 10px; top:70px"> <button onclick="model('reward')">收益明细</button></div>
                     </div>
                 </div>
             </div>
-            <div class="invite" style="text-align: center;">
-                <p class="text">邀请链接</p>
-                <textarea id="linkurl" rows="2" style="width: 95%;margin: 0 10px;" readonly="true"></textarea>
-                <div class="inline-div link" onclick="cp()">点击复制</div>
-            </div>
+
             <div class="inline-div preachers_reward  ">
                 <div class="title">
                     — 布道者奖励 —
@@ -227,22 +223,18 @@
             </div>
             <div class="inline-div preachers_reward  ">
                 <div class="title">
-                    — 奖励 —
-                    <div class="right">
+                    — 全球分红 —
+                    <!-- <div class="right">
                         <img src="image/index/question.png" onclick="model('reward')"/>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="body">
                     <table>
                         <thead>
                         <tr>
-                            <td class="select">
-                                <select>
-                                    <option>全部奖励</option>
-                                </select>
-                            </td>
-                            <td>时间</td>
-                            <td>额度</td>
+                            <td>级别</td>
+                            <td>人数</td>
+                            <td>人均分红</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -288,7 +280,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>版权所有©201</p>
+                <p>版权所有©2019</p>
                 <p>ETH BANK Foundation 保留所有权利</p>
             </div>
         </div>
@@ -382,8 +374,8 @@
                     </div>
                 </div>
                 <div class="body">
-                    <div class="num">购买GPP数量：<input type="text " value="0" id="gmmps" oninput="jseth(this.value)">  </div>
-                    <div class="need">需要ETH：<span id="xyeth">0</span>  </div>
+                    <div class="num">花费ETH：<input type="number" value="0" id="xyeth" oninput="jseth(this.value)">  </div>
+                    <div class="need">获得GPP数量：<span id="gmmps">0</span>  </div>
                     <div class="button" onclick="buyticket()">
                         <button>立即支付</button>
                     </div>
@@ -440,11 +432,11 @@
                     </div>
                 </div>
                 <div class="body">
-                    <div class="num">支付金额：<input type="text " value="0" id="gmlc" oninput="jseth2(this.value)">ETH  </div>
+                    <!-- <div class="num">支付金额：<input type="text " value="0" id="gmlc" oninput="jseth2(this.value)">ETH  </div>
                     <div class="need">需要门票：<span id="xymp">0</span>  </div>
                     <div class="button" onclick="invest()">
                         <button>立即支付</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -594,6 +586,7 @@
    var wallet;
    var isMetaMask=false;
    var rate=0;
+   var bs=3;
 
 	$(function(){
 		if (typeof web3 !== 'undefined') {
@@ -645,7 +638,7 @@
 		}
 		web3.eth.defaultAccount = accounts[0];
         $("#zh").html(web3.eth.defaultAccount);
-        $("#linkurl").html("https://zzpublic.github.io/gpp/?r="+web3.eth.defaultAccount);
+        $("#linkurl").val("https://zzpublic.github.io/gpp/?r="+web3.eth.defaultAccount);
         getBalance();setInterval(getBalance,10000);
 
 		var infoContract = web3.eth.contract(abi);
@@ -709,7 +702,7 @@
 			   if(!error)
 			   {
 				   console.log(JSON.parse(result));
-				    $("#zhmpyr").html((JSON.parse(result)/1000000000000000000).toFixed(4));
+				    $("#zhmpyr").html((JSON.parse(result)/1000000000000000000).toFixed(4)-0);
 			   }
 				  
 			   else
@@ -742,9 +735,7 @@
 		cc.sellTicketCount(function(e, r){ 
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
-			$("#symp").html(ymmp-0==0?200*rate:symp%(200*rate));
-            $("#symp2").html(200*(rate-1));
-            $("#symp3").html(200*(rate-2));
+			$("#symp").html(ymmp-0==0?"200eth":((symp%(200*rate))/rate).toFixed(2))+" eth";
 			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
@@ -768,11 +759,13 @@
                                 {
                                     $("#tjr").html("<a style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
                                 }
-								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
-								$("#yjsy").html((result2[2]/1000000000000000000*3).toFixed(4));
-								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
-								$("#sysy").html((result2[2]/1000000000000000000*3).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
-								$("#txed").html((result2[3]/1000000000000000000).toFixed(4));
+                                if(result2[2]/1e18>30){ bs=4;}
+                                if(result2[2]/1e18>60){bs=5;}
+								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4)-0);
+								$("#yjsy").html((result2[2]/1000000000000000000*bs).toFixed(4)-0);
+								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4)-0);
+								$("#sysy").html((result2[2]/1000000000000000000*bs).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
+								$("#txed").html((result2[3]/1000000000000000000).toFixed(4)-0);
 
 							}
                         }
@@ -1130,11 +1123,13 @@
                                 {
                                     $("#tjr").html("<a  style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
                                 }      
-								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
-								$("#yjsy").html((result2[2]/1000000000000000000*3).toFixed(4));
-								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
-								$("#sysy").html((result2[2]/1000000000000000000*3).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
-                                $("#txed").html((result2[3]/1000000000000000000).toFixed(4));
+                                if(result2[2]/1e18>30){ bs=4;}
+                                if(result2[2]/1e18>60){bs=5;}
+								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4)-0);
+								$("#yjsy").html((result2[2]/1000000000000000000*bs).toFixed(4)-0);
+								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4)-0);
+								$("#sysy").html((result2[2]/1000000000000000000*bs).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
+                                $("#txed").html((result2[3]/1000000000000000000).toFixed(4)-0);
                             }
                             if(tjrid!=-1 && tjrid-10000==i)
                             {
@@ -1163,7 +1158,7 @@
 
    function jseth(x)
    {
-		$("#xyeth").html(x/rate); 
+		$("#gmmps").html(x*rate); 
 	}
 	function jseth2(x)
    {
