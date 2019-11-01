@@ -123,15 +123,14 @@
                 <div class="title">
                     — 个人中心 —
                     <div class="right">
-                        <img src="../image/index/question.png" onclick="model('user')"/>
+                        <img src="image/index/question.png" onclick="model('user')"/>
                     </div>
                 </div>
                 <div class="body">
                     <div>
-						<div align="center" id="zh" style="font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
-                       <div>
-                            <p>账户ETH余额：<span id="zhye">0</span> ETH</p>
-                        </div>
+                        <div align="center" id="zh" style="font-size:20px;color:#fff; max-width:250px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
+                        <div><p style="display:block;max-width:250px;overflow:hidden; text-overflow:ellipsis;">我的推荐人：<span id="tjr" ></span></p></div>
+                        <div><p>账户ETH余额：<span id="zhye">0</span> ETH</p></div>
 						<p>我的等级：<span>V0</span></p>
                         <p>我的分享：<span>0</span> （人）</p>
                         <p>团队业绩：<span>0</span> ETH</p>
@@ -145,7 +144,7 @@
                 <div class="title">
                     — 合约活期理财 —
                     <div class="right">
-                        <img src="../image/index/question.png" onclick="model('contract')"/>
+                        <img src="image/index/question.png" onclick="model('contract')"/>
                     </div>
                 </div>
                 <div class="body">
@@ -745,16 +744,37 @@
                         {
                             if(result2[0]==web3.eth.defaultAccount.toLowerCase())
 							{
+                                if(result2[1]!="0x0000000000000000000000000000000000000000")
+                                {
+                                    $("#tjr").html(result2[1]);
+                                    $("#tjr").parent().parent().hide();
+                                }
+                                else
+                                {
+                                    $("#tjr").html("<a style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
+                                }
 								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
-								$("#yjsy").html((result2[2]/1000000000000000000).toFixed(4)*3);
+								$("#yjsy").html((result2[2]/1000000000000000000*3).toFixed(4));
 								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
-								$("#sysy").html((result2[2]/1000000000000000000).toFixed(4)*3-(result2[4]/1000000000000000000).toFixed(4));
+								$("#sysy").html((result2[2]/1000000000000000000*3).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
 								$("#txed").html((result2[3]/1000000000000000000).toFixed(4));
 
 							}
                         }
                     });
-		}
+        }
+   }
+   function setre()
+   {
+       var x = prompt("请输入推荐人地址,42位,只可设置一次");
+       if(/^0[xX][A-Fa-f0-9]{40}$/.test(x))
+       {
+           registe(x);
+       }
+       else
+       {
+           alert("格式错误");
+       }
    }
    function getBalance()
    {
@@ -1085,11 +1105,20 @@
                             //console.log(result2);
                             if(result2[0]==web3.eth.defaultAccount.toLowerCase())
 							{
-                                myuid= i;               
+                                myuid= i;     
+                                if(result2[1]!="0x0000000000000000000000000000000000000000")
+                                {
+                                    $("#tjr").html(result2[1]);
+                                    $("#tjr").parent().parent().hide();
+                                }
+                                else
+                                {
+                                    $("#tjr").html("<a  style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
+                                }      
 								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4));
-								$("#yjsy").html((result2[2]/1000000000000000000).toFixed(4)*3);
+								$("#yjsy").html((result2[2]/1000000000000000000*3).toFixed(4));
 								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4));
-								$("#sysy").html((result2[2]/1000000000000000000).toFixed(4)*3-(result2[4]/1000000000000000000).toFixed(4));
+								$("#sysy").html((result2[2]/1000000000000000000*3).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
                                 $("#txed").html((result2[3]/1000000000000000000).toFixed(4));
                             }
                             if(tjrid!=-1 && tjrid-10000==i)
