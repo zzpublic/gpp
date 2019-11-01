@@ -803,7 +803,10 @@
                data: cmd
            },function(receipt){
                console.log(receipt);
-               alert("提交成功，请耐心等候");
+               if(receipt==null)
+               {
+                alert("提交成功，请耐心等候");
+               }
            });
        }
 	   else
@@ -871,7 +874,10 @@
                         data: cmd
                     },function(receipt){
                         console.log(receipt);
-                        alert("提交成功，请耐心等候");
+                        if(receipt==null)
+                        {
+                            alert("提交成功，请耐心等候");
+                        }
                     });
                 }
                 else
@@ -941,7 +947,11 @@
                data: cmd
            },function(receipt){
                console.log(receipt);
-               alert("提交成功，请耐心等候");
+               if(receipt==null)
+               {
+                alert("提交成功，请耐心等候");
+               }
+              
            });
        }
 	   else
