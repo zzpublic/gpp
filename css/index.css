@@ -237,7 +237,7 @@ header .header-title p {
 #p_b .contract .earnings {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding: 8px 8px 14px 16px;
 }
 #p_b .contract .earnings p {
@@ -255,6 +255,9 @@ header .header-title p {
   color: #000;
   font-size: 14px;
   margin-bottom: 5px;
+}
+#p_b .contract .earnings button:first-child {
+  margin-bottom: 40px;
 }
 #p_b .invite .is_invite {
   position: relative;
@@ -348,48 +351,8 @@ header .header-title p {
 #p_b .copyright p {
   margin-bottom: 0;
 }
-#p_b .select {
-  display: inline-block;
-  width: 100px;
-  position: relative;
-  vertical-align: middle;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #A59C13;
-  text-shadow: none;
-  border-radius: 4px;
-  transition: box-shadow 0.25s ease;
-  z-index: 2;
-}
-#p_b .select:hover {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-}
-#p_b .select:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 7px solid transparent;
-  border-top-color: #A59C13;
-  top: 9px;
-  right: 10px;
-  cursor: pointer;
-  z-index: -2;
-}
-#p_b .select select {
-  cursor: pointer;
-  padding: 0 10px;
-  width: 100%;
-  border: none;
-  background: transparent;
-  background-image: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-#p_b .select select:focus {
-  outline: none;
-}
 #model .model-bg {
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
@@ -400,6 +363,7 @@ header .header-title p {
   opacity: 0.8;
 }
 #model .model {
+  z-index: 11;
   position: fixed;
   display: none;
   top: 200px;
@@ -438,16 +402,29 @@ header .header-title p {
 }
 #model .model-table .body table thead tr {
   height: 35px;
+  width: 25%;
 }
 #model .model-table .body table tbody {
   line-height: 35px;
   color: #ddd;
 }
-#model .explain .body {
+#model .model-text .body {
   padding: 25px 20px;
   font-size: 15px;
   color: #ddd;
   line-height: 25px;
+}
+#model .model-text .body p {
+  margin-bottom: 0;
+}
+#model .model-text .body .t {
+  color: #FFF77A;
+}
+#model .model-text .body .flex {
+  display: flex;
+}
+#model .model-text .body .flex span {
+  width: 35%;
 }
 #model .buy .body {
   padding: 26px 21px 19px;
@@ -494,4 +471,53 @@ header .header-title p {
   border-radius: 20px;
   border: none;
   color: #000;
+}
+#model .select {
+  height: 30px;
+}
+#model .select select {
+  height: 30px;
+  position: relative;
+  top: -7px;
+}
+.select {
+  display: inline-block;
+  width: 100px;
+  position: relative;
+  vertical-align: middle;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #A59C13;
+  text-shadow: none;
+  border-radius: 4px;
+  transition: box-shadow 0.25s ease;
+  z-index: 2;
+}
+.select:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+.select:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-top-color: #A59C13;
+  top: 9px;
+  right: 10px;
+  cursor: pointer;
+  z-index: -2;
+}
+.select select {
+  cursor: pointer;
+  padding: 0 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select:focus {
+  outline: none;
 }

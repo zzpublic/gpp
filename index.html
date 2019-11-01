@@ -122,6 +122,9 @@
             <div class="inline-div user">
                 <div class="title">
                     — 个人中心 —
+                    <div class="right">
+                        <img src="../image/index/question.png" onclick="model('user')"/>
+                    </div>
                 </div>
                 <div class="body">
                     <div>
@@ -141,6 +144,9 @@
             <div class="contract inline-div">
                 <div class="title">
                     — 合约活期理财 —
+                    <div class="right">
+                        <img src="../image/index/question.png" onclick="model('contract')"/>
+                    </div>
                 </div>
                 <div class="body">
                     <div class="balance">
@@ -172,6 +178,9 @@
             <div class="inline-div preachers_reward  ">
                 <div class="title">
                     — 布道者奖励 —
+                    <div class="right">
+                        <img src="image/index/question.png" onclick="model('preachers_reward')"/>
+                    </div>
                 </div>
                 <div class="body">
                     <table>
@@ -211,6 +220,9 @@
             <div class="inline-div preachers_reward  ">
                 <div class="title">
                     — 奖励 —
+                    <div class="right">
+                        <img src="image/index/question.png" onclick="model('reward')"/>
+                    </div>
                 </div>
                 <div class="body">
                     <table>
@@ -316,7 +328,7 @@
                     </table>
                 </div>
             </div>
-            <div class="model explain">
+            <div class="model explain model-text" style="top: calc(50% - 234px);">
                 <div class="title">
                     <p>说明</p>
                     <div class="right">
@@ -324,9 +336,34 @@
                     </div>
                 </div>
                 <div class="body">
-                    开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖
-                    说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体内容开奖说明具体
-                    内容开奖说明具体内容开奖说明具体内容.
+                    <p class="t">幸运池</p>
+                    <p>门票兑换所得30%ETH用于每日开奖，随机抽取31名幸运玩家。</p>
+                    <p class="flex"> <span>第1名</span>      独享当日门票收益10%ETH</p>
+                    <p class="flex"><span>第2-11名 </span>     共享当日门票收益10%ETH</p>
+                    <p class="flex"><span>第12-31名 </span>      共享当日门票收益10%ETH</p>
+                    <br>
+                    <p class="t">保险池</p>
+                    <p>门票兑换所得50%ETH进入保险池，用于保障最后加入玩家利益，封顶50000ETH。
+                        采用48小时倒计时制，理财合约每加入1个ETH增加3小时，封顶48小时。
+                        48小时没有玩家充值，倒计时结束保险池开出，按投资时间由后往前分配给最后参与的玩家，按投资金额应得倍数逐个出场。</p>
+
+                </div>
+            </div>
+            <div class="model user model-text">
+                <div class="title">
+                    <p>说明</p>
+                    <div class="right">
+                        <img class="close-img" src="image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <p>V1   三条线，每条线业绩达到300ETH  </p>
+                    <p> 享受全球业绩5%加权分红，伞下新增业绩3%分红</p>
+                    <p> V2  直推出现三个V1</p>
+                    <p> 享受全球业绩3%加权分红，伞下新增业绩2%分红</p>
+                    <p> V3  直推出现三个V2  </p>
+                    <p> 享受全球业绩2%加权分红，伞下新增业绩1%分红</p>
+                    <p> 平级享受三代新增业绩分红</p>
                 </div>
             </div>
             <div class="model ticket buy" >
@@ -402,6 +439,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="model withdraw buy">
                 <div class="title">
                     <p>申请提现</p>
@@ -414,6 +452,84 @@
                     <div class="button">
                         <button onclick="tx()">立即提现</button>
                     </div>
+                </div>
+            </div>
+            <div class="model contract model-text">
+                <div class="title">
+                    <p>说明</p>
+                    <div class="right">
+                        <img class="close-img" src="../image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <p class="t">理财模式</p>
+                    <p class="flex"> <span>1-30以太</span>3倍出局</p>
+                    <p class="flex"> <span>31-60以太</span>4倍出局</p>
+                    <p class="flex"> <span>61以太以上</span>5倍出局</p>
+                    <p>动静结合出局制，出局后24小时可原点复投。需购买10%投资金额的门票GPP，并且销毁后才可加入理财合约</p>
+                    <p class="t">例</p>
+                    <p >投资100ETH，需再用10ETH参与共振获得门票，销毁门票后方可加入合约，即100ETH+价值10ETH的GPP门票销毁。</p>
+                </div>
+            </div>
+            <div class="model preachers_reward model-text" >
+                <div class="title">
+                    <p>说明</p>
+                    <div class="right">
+                        <img class="close-img" src="image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <p class="t">布道者奖励</p>
+                    <p>门票兑换所得20%ETH用于奖励每日直推业绩最高11名玩家</p>
+                    <p class="flex"> <span style="width: 60%">每日直推业绩第1名</span>独享10%</p>
+                    <p class="flex"> <span style="width: 60%">每日直推业绩第2-11名</span>分享10%</p>
+                </div>
+            </div>
+
+            <div class="model reward model-table" >
+                <div class="title">
+                    <p>— 收益明细 —</p>
+                    <div class="right">
+                        <img class="close-img" src="../image/index/close.png"/>
+                    </div>
+                </div>
+                <div class="body">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td class="select">
+                                <select>
+                                    <option>全部奖励</option>
+                                </select>
+                            </td>
+                            <td>时间</td>
+                            <td>额度</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>分红</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>静态奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>大奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+                        <tr>
+                            <td>小奖池</td>
+                            <td>2019-09-05</td>
+                            <td>0.0001 ETH</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
