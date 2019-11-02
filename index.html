@@ -16,6 +16,10 @@
         {
              max-width:120px;overflow:hidden; text-overflow:ellipsis;
         }
+        .num
+        {
+            color: #999;
+        }
     </style>
 </head>
 <body style="background-color: #000">
@@ -93,8 +97,9 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余额度：<span id="symp"></span></span>
+                            
                         </div>
+                        <span class="num">剩余额度：<span id="symp"></span></span>
                     </div> 
 					<div class="item">
                         <div class="row-div">
@@ -107,9 +112,10 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余额度：<span id="symp2">200 eth</span></span>
+                            
                         </div>
                         <!-- <div class="num2">剩余轮数:<span></span>10轮</div> -->
+                        <span class="num">剩余额度：<span id="symp2">200 eth</span></span>
                     </div> 
 					<div class="item">
                         <div class="row-div">
@@ -122,9 +128,10 @@
                                      style="width: 90%;background-color: #E2E208">
                                 </div>
                             </div>
-                            <span class="num">剩余额度：<span id="symp3">200 eth</span></span>
+                            
                         </div>
                         <!-- <div class="num2">剩余轮数:<span>10</span>轮</div> -->
+                        <span class="num">剩余额度：<span id="symp3">200 eth</span></span>
                     </div> 
                 </div>
             </div>
@@ -139,11 +146,11 @@
                 <div class="body" style="position: relative;">
                     <div>
                         <div align="center" id="zh" style="font-size:20px;color:#fff; max-width:300px;overflow:hidden; text-overflow:ellipsis;">未登录</div>
-                        <div><p style="display:block;max-width:300px;overflow:hidden; text-overflow:ellipsis;">我的推荐人：<span id="tjr" ></span></p></div>
+                        <div><p style="display:block;max-width:350px;overflow:hidden; text-overflow:hidden; word-break: break-all;">我的推荐人：<span id="tjr" ></span></p></div>
                         <div><p>账户ETH余额：<span id="zhye">0</span> ETH</p></div>
-						<p>我的等级：<span>V0</span></p>
+						<p>我的等级：<span id="wddj">V0</span></p>
                         <p>我的分享：<span id="tjrs">0</span> （人）</p>
-                        <p>团队业绩：<span>0</span> ETH</p>
+                        <p>团队业绩：<span id="tdyj">0</span> ETH</p>
                         <p>我的邀请链接：<input id="linkurl" style="width:50%;border:0px solid transparent; background:transparent;">&nbsp;&nbsp;<a style="color: #FFF77A;" href="javascript:cp()">复制</a></p>
                     </div>
                     <div style="position: absolute; right:10px; top:160px;">
@@ -739,7 +746,7 @@
 		cc.sellTicketCount(function(e, r){ 
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
-			$("#symp").html(ymmp-0==0?"200eth":((symp%(200*rate))/rate).toFixed(2))+" eth";
+			$("#symp").html(ymmp-0==0?"200eth":(((symp%(200*rate))/rate).toFixed(2))+" ETH");
 			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
@@ -747,34 +754,50 @@
 			$("#yxhmp").html((JSON.parse(r)/1000000000000000000).toFixed(0));
 		});
 
-		if(myuid!=-1)
-		{
-			cc.users(myuid,function(error2, result2){
-                        if(!error2)
-                        {
-                            if(result2[0].toLowerCase()==web3.eth.defaultAccount.toLowerCase())
-							{
-                                if(result2[1]!="0x0000000000000000000000000000000000000000")
-                                {
-                                    $("#tjr").html(result2[1]);
-                                    $("#tjr").parent().parent().hide();
-                                }
-                                else
-                                {
-                                    $("#tjr").html("<a style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
-                                }
-                                if(result2[2]/1e18>30){ bs=4;}
-                                if(result2[2]/1e18>60){bs=5;}
-								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4)-0);
-								$("#yjsy").html((result2[2]/1000000000000000000*bs).toFixed(4)-0);
-								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4)-0);
-								$("#sysy").html((result2[2]/1000000000000000000*bs).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
-								$("#txed").html((result2[3]/1000000000000000000).toFixed(4)-0);
+		getu();
+   }
 
-                            }
-                        }
-                    });
+   function getu()
+   {
+        if( web3.eth.defaultAccount==null)
+	    {
+			return;
         }
+        $.get("https://qbank.wotrack.com:9443/getmy?addr="+web3.eth.defaultAccount,function(d){
+            if(d.length>0)
+            {
+                let m = d[0];
+                myuid= m.id;
+                if(m.parent!="0x0000000000000000000000000000000000000000")
+                {
+                    $("#tjr").html(m.parent.substr(0,20)+"...");
+                }
+                else
+                {
+                    $("#tjr").html("<a  style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
+                }      
+                if(m.amount>30){ bs=4;}
+                if(m.amount>60){bs=5;}
+                $("#lczhye").html(m.amount-0);
+                $("#yjsy").html((m.amount*bs).toFixed(4)-0);
+                $("#yhsy").html(m.rewardall-0);
+                $("#sysy").html((m.amount*bs-m.rewardall).toFixed(4)-0);
+                $("#txed").html(m.reward-0);
+                $("#wddj").html("V"+m.level);
+                $("#tdyj").html(m.achievement);
+            }
+        });
+        $.get("https://qbank.wotrack.com:9443/getzt?addr="+web3.eth.defaultAccount,function(d){
+            if(d.length>0)
+            {
+                $("#tjrs").html(d.length);
+                $("#wdfx").html("");
+                $(d).each(function(i,v){
+                    $("#wdfx").append("<tr><td class='fxaddr'>"+v.addr+"</td><td>"+(v.amount-0)+"</td><td>"+(v.achievement-0)+"</td></tr>");
+                });
+                
+            }
+        });
    }
    function setre()
    {
@@ -1099,65 +1122,8 @@
 	        result = ""+parseInt(hour)+"小时"+result;
 	    }
 	    return result;
-	}
-
-   function getu()
-   {
-        if( web3.eth.defaultAccount==null)
-	    {
-			return;
-		}
-        cc.usersLength(function(error, result){
-           if(!error)
-           {
-               console.log(JSON.parse(result));
-               var tjraddr="";
-               var tjrid=-1;
-              var tjrs=0;
-               for(let i=0;i<result;i++)
-               {
-                  cc.users(i,function(error2, result2){
-                        if(!error2)
-                        {
-                            //console.log(result2);
-                            if(result2[0]==web3.eth.defaultAccount.toLowerCase())
-							{
-                                myuid= i;     
-                                if(result2[1]!="0x0000000000000000000000000000000000000000")
-                                {
-                                    $("#tjr").html(result2[1]);
-                                    $("#tjr").parent().parent().hide();
-                                }
-                                else
-                                {
-                                    $("#tjr").html("<a  style='color:#ff0;' href='javascript:setre()'>未设置推荐人</a>");
-                                }      
-                                if(result2[2]/1e18>30){ bs=4;}
-                                if(result2[2]/1e18>60){bs=5;}
-								$("#lczhye").html((result2[2]/1000000000000000000).toFixed(4)-0);
-								$("#yjsy").html((result2[2]/1000000000000000000*bs).toFixed(4)-0);
-								$("#yhsy").html((result2[4]/1000000000000000000).toFixed(4)-0);
-								$("#sysy").html((result2[2]/1000000000000000000*bs).toFixed(4)-(result2[4]/1000000000000000000).toFixed(4));
-                                $("#txed").html((result2[3]/1000000000000000000).toFixed(4)-0);
-                            }
-
-                            if(result2[1].toLowerCase()==web3.eth.defaultAccount.toLowerCase())
-							{
-                                tjrs++;
-                                $("#tjrs").html(tjrs);
-                                $("#wdfx").append("<tr><td class='fxaddr'>"+result2[0]+"</td><td>"+((result2[2]/1e18).toFixed(4)-0)+"</td><td>"+((result2[2]/1e18).toFixed(4)-0)+"</td></tr>");
-                            }
-                        }
-                      
-
-                    });
-               }
-           }  
-           else
-           {   console.error(error);}    
-       })
-   }
-
+    }
+    
    function jseth(x)
    {
 		$("#gmmps").html(x*rate); 
