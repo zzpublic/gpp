@@ -743,10 +743,10 @@
 		
         cc.endTime(function(e, r){ syms=JSON.parse(r)-x; if(syms<0){syms=0;} $("#djs").html(formatSeconds(syms));});
 
-		cc.sellTicketCount(function(e, r){ 
+		cc.sellTicketIncome(function(e, r){ 
 			var ymmp=(JSON.parse(r)/1000000000000000000).toFixed(0);
 			var symp  =628000000-ymmp;
-			$("#symp").html(ymmp-0==0?"200eth":(((symp%(200*rate))/rate).toFixed(2))+" ETH");
+			$("#symp").html(ymmp-0==0?"200eth":(200-ymmp%200)+" ETH");
 			//$("#syls").html(ymmp-0==0?10:Math.floor((symp%10000)/1000));
 			
 		});
@@ -1114,12 +1114,12 @@
 	            middle= parseInt(middle%60);
 	        }
 	    }
-	    var result = ""+parseInt(theTime)+"秒";
+	    var result = ""+parseInt(theTime)+":";
 	    if(middle > 0) {
-	        result = ""+parseInt(middle)+"分"+result;
+	        result = ""+parseInt(middle)+":"+result;
 	    }
 	    if(hour> 0) {
-	        result = ""+parseInt(hour)+"小时"+result;
+	        result = ""+parseInt(hour)+":"+result;
 	    }
 	    return result;
     }
