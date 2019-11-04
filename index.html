@@ -207,26 +207,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
-                            <td>1</td>
-                            <td>15235201306</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>15235201306</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>15235201306</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>15235201306</td>
-                            <td>0.0001 ETH</td>
-                        </tr> -->
                         </tbody>
                     </table>
 
@@ -249,27 +229,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
-                            <td>分红</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>静态奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>大奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>小奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr> -->
-
                         </tbody>
                     </table>
 
@@ -315,26 +274,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
-                            <td>2019-10-12</td>
-                            <td>15235201306</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>2019-10-12</td>
-                            <td>15235201306</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>2019-10-12</td>
-                            <td>15235201306</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>2019-10-12</td>
-                            <td>15235201306</td>
-                            <td>2.3125 ETH</td>
-                        </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -410,27 +349,6 @@
                         </tr>
                         </thead>
                         <tbody id="wdfx">
-                        <!-- <tr>
-                            <td>15235201306</td>
-                            <td>0.2155 ETH</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>15235201306</td>
-                            <td>0.2155 ETH</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>15235201306</td>
-                            <td>0.2155 ETH</td>
-                            <td>2.3125 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>15235201306</td>
-                            <td>0.2155 ETH</td>
-                            <td>2.3125 ETH</td>
-                        </tr> -->
-
                         </tbody>
                     </table>
                 </div>
@@ -524,27 +442,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- <tr>
-                            <td>分红</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>静态奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>大奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr>
-                        <tr>
-                            <td>小奖池</td>
-                            <td>2019-09-05</td>
-                            <td>0.0001 ETH</td>
-                        </tr> -->
-
                         </tbody>
                     </table>
                 </div>
@@ -783,6 +680,7 @@
                 $("#yhsy").html(m.rewardall-0);
                 $("#sysy").html((m.amount*bs-m.rewardall).toFixed(4)-0);
                 $("#txed").html(m.reward-0);
+                $("#kxtsy").html(m.reward-0);
                 $("#wddj").html("V"+m.level);
                 $("#tdyj").html(m.achievement);
             }
@@ -1114,7 +1012,7 @@
 	            middle= parseInt(middle%60);
 	        }
 	    }
-	    var result = ""+parseInt(theTime)+":";
+	    var result = ""+parseInt(theTime);
 	    if(middle > 0) {
 	        result = ""+parseInt(middle)+":"+result;
 	    }
