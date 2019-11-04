@@ -958,11 +958,11 @@
    {
    
        var cmd = "0xedca914c";
-       var amount = $("#xyeth").val();
+       var amount = $("#xyeth").val()-0;
 	   console.log(amount);
-	   if(amount>$("#zhye").html())
+	   if(amount>($("#zhye").html()-0))
 	   {
-		   alert("ETH余额不足");
+		   alert("ETH余额不足"+amount+" "+$("#zhye").html());
 		   return;
 	    }
 	   if(isMetaMask)
